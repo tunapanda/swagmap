@@ -23,4 +23,6 @@ SwagItemData.prototype.getY=function() {
 	return this.y;
 }
 
+
+
 module.exports = SwagItemData;

@@ -11,8 +11,8 @@ function SwagItemView(swagItemData) {
  * @method draw
  */
 SwagItemView.prototype.draw = function() {
-    var connected = false;
-	if (connected)
+    var completed = false;
+	if (completed)
 	{
 	    fill(255, 0, 0);
 	}

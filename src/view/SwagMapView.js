@@ -1,4 +1,5 @@
 var SwagItemView = require("./SwagItemView");
+var SwagConnectionView = require("./SwagConnectionView");
 
 /**
  * The main view.
@@ -6,6 +7,7 @@ var SwagItemView = require("./SwagItemView");
  */
 function SwagMapView() {
 	this.swagItemViews = [];
+	this.swagConnection;
 }
 
 /**
@@ -17,11 +19,18 @@ SwagMapView.prototype.addSwagItem = function(swagItemData) {
 }
 
 /**
+*  creates a connection between two Swag items
+*  @method addConnection
+*/
+SwagMapView.prototype.addConnection = function(swagItem1, swagItem2){
+    this.swagConnection = new SwagConnectionView(swagItem1, swagItem2);
+}
+/**
  * Do the setup.
  * @method setup
  */
 SwagMapView.prototype.setup = function() {
-	console.log("setting up");
+	console.log("setting up... SwagConnectionView="+SwagConnectionView);
 	createCanvas(windowWidth - 1, windowHeight - 1);
 }
 
@@ -40,6 +49,9 @@ SwagMapView.prototype.draw = function() {
 
 	for (var i = 0; i < this.swagItemViews.length; i++)
 		this.swagItemViews[i].draw();
+
+    if (this.swagConnection)
+        this.swagConnection.draw();
 }
 
 /**
