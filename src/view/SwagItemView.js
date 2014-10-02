@@ -11,6 +11,11 @@ function SwagItemView(swagItemData) {
  * @method draw
  */
 SwagItemView.prototype.draw = function() {
+    var connected = false;
+	if (connected)
+	{
+	    fill(255, 0, 0);
+	}
 	ellipse(this.swagItemData.getX(), this.swagItemData.getY(), 50, 50);
 }
 

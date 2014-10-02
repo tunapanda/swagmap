@@ -44,10 +44,16 @@ function SwagItemView(swagItemData) {
  * @method draw
  */
 SwagItemView.prototype.draw = function() {
+    var connected = true;
+	if (connected)
+	{
+	    fill(255, 0, 0);
+	}
 	ellipse(this.swagItemData.getX(), this.swagItemData.getY(), 50, 50);
 }
 
 module.exports = SwagItemView;
+
 },{}],4:[function(require,module,exports){
 var SwagItemView = require("./SwagItemView");
 
