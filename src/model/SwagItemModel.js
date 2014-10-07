@@ -1,4 +1,5 @@
 var SwagItemData = require("../data/SwagItemData");
+
 /**
  * This is resposible for creating an item model using jsondata
  * @class SwagItemModel
