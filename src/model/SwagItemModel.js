@@ -14,9 +14,8 @@ function SwagItemModel(jsondata) {
 *  @method getSwagItemData
 */
 SwagItemModel.prototype.getSwagItemData = function(){
-    var swagItemData = new SwagItemModel(this.x, this.y);
+    var swagItemData = new SwagItemData(this.x, this.y);
     return swagItemData;
-    
 }
 
 module.exports = SwagItemModel;

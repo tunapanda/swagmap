@@ -1,4 +1,4 @@
-/*var EventDispatcher = require("../utils/EventDispatcher");
+var EventDispatcher = require("../utils/EventDispatcher");
 var inherits = require("inherits");
 var fs = require("fs")
 
@@ -6,16 +6,16 @@ var fs = require("fs")
  * Main swag map model.
  * @class SwagMapModel
  */
-/*function SwagMapModel() {
+function SwagMapModel() {
     this.dataitems;
 }
 inherits(SwagMapModel, EventDispatcher);
 
 /**
 *  This function loads the JSON file and returns a list of items 
-*  @load
+*  @ method load
 */
-/*SwagMapModel.prototype.load = function(url){
+SwagMapModel.prototype.load = function(url){
     fs.readFile(url, function (err, data){
     	if(err){
     		console.log("Error" + err);
@@ -27,8 +27,12 @@ inherits(SwagMapModel, EventDispatcher);
     }.bind(this));
 }
 
+/**
+*  This function gets data items form the JOSN file
+*  @method getItemDatas
+*/
 SwagMapModel.prototype.getItemDatas = function (){
-	console.log(this.dataitems.items);
+	//console.log(this.dataitems.items);
 	return this.dataitems.items;
 }
-module.exports = SwagMapModel;*/
+module.exports = SwagMapModel;
