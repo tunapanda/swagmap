@@ -11,7 +11,7 @@ describe("SwagMapModel", function() {
 		expect(spy).toHaveBeenCalled();
 	});
 
-	/*it("can load a swag map", function(done) {
+	it("can load a swag map", function(done) {
 		var m = new SwagMapModel();
 
 		m.on("loaded", function() {
@@ -20,5 +20,5 @@ describe("SwagMapModel", function() {
 		});
 
 		m.load(__dirname + "/res/swagmap.json");
-	});*/
+	});
 });
