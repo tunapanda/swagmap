@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script language="javascript" src="p5.js"></script>
+		<script language="javascript" src="swagpath.bundle.js"></script>
+		<style> 
+			body {
+				padding: 0; 
+				margin: 0;
+				overflow: hidden;
+			}
+		</style>
+
+		<script>
+			var view=new swagpath.SwagpathView();
+
+			view.addSwagItem(new swagpath.SwagItemData(50,100));
+			view.addSwagItem(new swagpath.SwagItemData(200,150));
+
+			function setup() {
+				console.log("setup");
+				view.setup();
+			};
+
+			function draw() {
+				view.draw();
+			};
+
+			function windowResized() {
+				view.windowResized();
+			}
+		</script>
+	</head>
+	<body>
+	</body>	
+</html>
