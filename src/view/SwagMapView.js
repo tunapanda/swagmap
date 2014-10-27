@@ -50,4 +50,4 @@ SwagMapView.prototype.windowResized = function() {
 	resizeCanvas(windowWidth, windowHeight);
 }
 
-module.exports = SwagpathView;
+module.exports = SwagMapView;
