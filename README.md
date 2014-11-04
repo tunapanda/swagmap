@@ -10,8 +10,8 @@ Demos and docs
 
 Release early, release often!
 
-The following is published on each commit.
+The following is published on each commit, so there is no guarantee that they work _now_.
 
-For demos see: http://limikael.altervista.org/swagmapdemo/
+For visual tests and demos, see: http://limikael.altervista.org/swagmapdemo/
 
-For internal class docs: http://limikael.altervista.org/swagmapdoc/
+For internal class docs, see: http://limikael.altervista.org/swagmapdoc/
