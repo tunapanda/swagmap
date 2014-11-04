@@ -1,6 +1,6 @@
 /**
 *  Resposible for the display of a connction between two swagfacts
-*  @class SWagConnectionView
+*  @class SwagConnectionView
 */
 
 function SwagConnectionView(swagItem1, swagItem2){

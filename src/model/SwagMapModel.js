@@ -15,7 +15,7 @@ inherits(SwagMapModel, EventDispatcher);
 
 /**
  *  This function loads the JSON file and returns a list of items
- *  @ method load
+ *  @method load
  */
 SwagMapModel.prototype.load = function(url) {
     fs.readFile(url, function(err, data) {
