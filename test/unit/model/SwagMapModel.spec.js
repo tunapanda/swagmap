@@ -1,4 +1,5 @@
 var SwagMapModel = require("../../../src/model/SwagMapModel");
+var SwagItemModel = require("../../../src/model/SwagItemModel");
 
 describe("SwagMapModel", function() {
 	it("can dispatch events", function() {
@@ -16,6 +17,21 @@ describe("SwagMapModel", function() {
 
 		m.on("loaded", function() {
 			expect(m.getItemDatas().length).toBe(3);
+			done();
+		});
+
+		m.load(__dirname + "/res/swagmap.json");
+	});
+
+	it("has a number of SwagMapModel:s internally", function(done) {
+		var m = new SwagMapModel();
+
+		m.on("loaded", function() {
+			var models = m.getSwagItemModels();
+
+			expect(models.length).toBe(3);
+			expect(models[0]).toEqual(jasmine.any(SwagItemModel));
+
 			done();
 		});
 
