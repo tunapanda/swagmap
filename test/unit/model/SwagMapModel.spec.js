@@ -1,5 +1,8 @@
 var SwagMapModel = require("../../../src/model/SwagMapModel");
 var SwagItemModel = require("../../../src/model/SwagItemModel");
+var http = require("http");
+var request = require("request");
+var fs = require("fs");
 
 describe("SwagMapModel", function() {
 	it("can dispatch events", function() {
@@ -36,5 +39,39 @@ describe("SwagMapModel", function() {
 		});
 
 		m.load(__dirname + "/res/swagmap.json");
+	});
+
+	it("can load from a url", function(done) {
+		var server = http.createServer();
+		server.listen(2345);
+
+		server.on("request", function(request, response) {
+			console.log("got request to: " + request.url);
+			expect(request.url).toBe("/file.json");
+			var fileContent = fs.readFileSync(__dirname + "/res/swagmap.json");
+			response.write(fileContent);
+			response.end();
+		});
+
+		// This is just for testing if the server works...
+		/*request('http://localhost:2345/file.json', function(error, response, body) {
+			console.log(body);
+			server.close();
+			done();
+		});*/
+
+		var m = new SwagMapModel();
+
+		m.on("loaded", function() {
+			var models = m.getSwagItemModels();
+
+			expect(models.length).toBe(3);
+			expect(models[0]).toEqual(jasmine.any(SwagItemModel));
+
+			server.close();
+			done();
+		});
+
+		m.load("http://localhost:2345/file.json");
 	});
 });
