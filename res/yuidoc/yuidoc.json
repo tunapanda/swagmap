@@ -2,6 +2,7 @@
 	"name": "swagmap",
 	"description": "SwagMap - Internal hacker documentation",
 	"version": "0.1",
+	"logo": "tunapanda.png",
 	"options": {
 		"outdir": "doc",
 		"paths": "src",

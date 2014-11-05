@@ -51,13 +51,21 @@ module.exports = function(grunt) {
 
 	grunt.registerTask("doc", function() {
 		var done = this.async();
+
 		var job = qsub("./node_modules/.bin/yuidoc");
 		job.arg("--configfile", "res/yuidoc/yuidoc.json");
 		job.show().expect(0);
-		job.run().then(done, function(e) {
-			console.log(e);
-			grunt.fail.fatal(e);
-		});
+		job.run().then(
+			function() {
+				fs.writeFileSync("doc/tunapanda.png", fs.readFileSync("res/yuidoc/tunapanga.png"));
+				done();
+			},
+
+			function(e) {
+				console.log(e);
+				grunt.fail.fatal(e);
+			}
+		);
 	});
 
 	grunt.registerTask("publish-doc", function() {
