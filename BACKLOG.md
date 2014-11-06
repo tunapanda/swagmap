@@ -4,7 +4,6 @@ Swagmap Backlog
 Current
 -------
 
-* Swagifacts should be displayed as completed or not completed.
 * Create the model. The model should be usable like this:
 ````
 var m=new SwagMapModel();
@@ -26,3 +25,4 @@ Completed
 ---------
 * Create connections between Swagifacts.
 * Define the .json to be loaded by swagmap app.
+* Swagifacts should be displayed as completed or not completed.
