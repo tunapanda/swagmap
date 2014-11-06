@@ -49,7 +49,7 @@ describe("SwagMapModel", function() {
 			console.log("got request to: " + request.url);
 			expect(request.url).toBe("/file.json");
 			var fileContent = fs.readFileSync(__dirname + "/res/swagmap.json");
-			response.write(fileContent);
+			console.log(response.write(fileContent));
 			response.end();
 		});
 

@@ -1,9 +1,10 @@
 var EventDispatcher = require("../utils/EventDispatcher");
 var inherits = require("inherits");
-var fs = require("fs")
+var fs = require("fs");
 var SwagItemModel = require("./SwagItemModel");
-var SwagItemData = require("../data/SwagItemData");
-
+var request = require('request');
+var http = require("http");
+var url = require("url");
 /**
  * Main swag map model.
  * @class SwagMapModel
@@ -13,12 +14,30 @@ function SwagMapModel() {
 }
 inherits(SwagMapModel, EventDispatcher);
 
+
+/**
+*  This function loads a local JSON file 
+*  @method loadFile
+*/
+SwagMapModel.prototype.load = function(pathOrURL) {
+    var parsedPathOrURL = url.parse(pathOrURL);
+    if (parsedPathOrURL.protocol)
+    {
+        this.loadUrl(parsedPathOrURL)
+    }
+    else 
+    {
+
+        this.loadFile(parsedPathOrURL)
+    } 
+}
+
 /**
  *  This function loads the JSON file and returns a list of items
- *  @ method load
+ *  @ method loadFile
  */
-SwagMapModel.prototype.load = function(url) {
-    fs.readFile(url, function(err, data) {
+SwagMapModel.prototype.loadFile = function(jsonPath) {
+    fs.readFile(jsonPath, function(err, data) {
         if (err) {
             console.log("Error" + err);
             return;
@@ -26,7 +45,6 @@ SwagMapModel.prototype.load = function(url) {
         var dataitems = JSON.parse(data);
         for (var i = 0; i < dataitems.items.length; i++){
             this.swagItemModels.push(new SwagItemModel(dataitems.items[i]));
-   //         console.log(this.swagItemModels.length);
         }
         
         this.trigger("loaded");
@@ -35,13 +53,34 @@ SwagMapModel.prototype.load = function(url) {
 }
 
 /**
- *  This function gets data items from the JSON file
+*  This function loads A JSON file from a url
+*  @method loadUrl
+*/
+SwagMapModel.prototype.loadUrl = function (jsonUrl){
+    var options = {
+        url: jsonUrl,
+    };
+    request(options, function(error, response, body){
+    if (!error && response.statusCode == 200){
+       var dataitems = JSON.parse(body);
+       for (var i = 0; i < dataitems.items.length; i++){
+            this.swagItemModels.push(new SwagItemModel(dataitems.items[i]));
+        }
+    }
+    this.trigger("request");
+    }.bind(this));
+}
+
+/**
+ *  This function gets data items from swagItemModels 
  *  @method getItemDatas
  */
 SwagMapModel.prototype.getItemDatas = function() {
     var itemDatas = [];
     for (var i = 0; i < this.swagItemModels.length; i++){
-        itemDatas.push(this.swagItemModels[i].getSwagItemData(this.swagItemModels[i].x, this.swagItemModels[i].y));
+        var x = this.swagItemModels[i].x;
+        var y = this.swagItemModels[i].y;
+        itemDatas.push(this.swagItemModels[i].getSwagItemData(x, y));
     }
     return itemDatas;
 }

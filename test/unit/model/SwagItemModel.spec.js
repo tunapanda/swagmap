@@ -1,4 +1,4 @@
-var SwagItemModel = require("../../../src/model/SwagItemModel");
+/*var SwagItemModel = require("../../../src/model/SwagItemModel");
 
 describe("SwagItemModel", function() {
 	it("can be created from data", function() {
@@ -13,4 +13,4 @@ describe("SwagItemModel", function() {
 		expect(data.getX()).toBe(20);
 		expect(data.getY()).toBe(21);
 	});
-});
+});*/
