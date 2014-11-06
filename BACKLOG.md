@@ -14,7 +14,6 @@ m.on("loaded",function() {
 });
 ````
 * Create the controller. The controller should tell the model to load iself, then take the data from the model and populate the view.
-* Define the .json to be loaded by swagmap app.
 
 Planned
 -------
@@ -26,3 +25,4 @@ Planned
 Completed
 ---------
 * Create connections between Swagifacts.
+* Define the .json to be loaded by swagmap app.
