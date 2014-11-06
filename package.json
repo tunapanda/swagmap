@@ -17,7 +17,7 @@
     "jasmine-node": "^2.0.0-beta4",
     "qsub": "0.0.6",
     "request": "^2.47.0",
-    "yuidocjs": "git+https://github.com/limikael/yuidoc",
+    "yuidocjs": "^0.3.50",
     "yuidocjs-die-on-warnings": "0.0.1"
   }
 }
