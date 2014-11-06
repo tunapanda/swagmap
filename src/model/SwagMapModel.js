@@ -34,7 +34,11 @@ SwagMapModel.prototype.load = function(pathOrURL) {
 
 /**
  *  This function loads the JSON file and returns a list of items
+<<<<<<< HEAD
  *  @ method loadFile
+=======
+ *  @method load
+>>>>>>> 3f8c236c6dfaceeb2a3fd383dba8a6a89172b954
  */
 SwagMapModel.prototype.loadFile = function(jsonPath) {
     fs.readFile(jsonPath, function(err, data) {
