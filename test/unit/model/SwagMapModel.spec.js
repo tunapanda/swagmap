@@ -53,16 +53,10 @@ describe("SwagMapModel", function() {
 			response.end();
 		});
 
-		// This is just for testing if the server works...
-		/*request('http://localhost:2345/file.json', function(error, response, body) {
-			console.log(body);
-			server.close();
-			done();
-		});*/
-
 		var m = new SwagMapModel();
 
 		m.on("loaded", function() {
+			console.log("loaded...");
 			var models = m.getSwagItemModels();
 
 			expect(models.length).toBe(3);

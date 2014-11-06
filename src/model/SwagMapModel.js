@@ -28,17 +28,13 @@ SwagMapModel.prototype.load = function(pathOrURL) {
     else 
     {
 
-        this.loadFile(parsedPathOrURL)
+        this.loadFile(pathOrURL)
     } 
 }
 
 /**
  *  This function loads the JSON file and returns a list of items
-<<<<<<< HEAD
  *  @ method loadFile
-=======
- *  @method load
->>>>>>> 3f8c236c6dfaceeb2a3fd383dba8a6a89172b954
  */
 SwagMapModel.prototype.loadFile = function(jsonPath) {
     fs.readFile(jsonPath, function(err, data) {
@@ -71,7 +67,7 @@ SwagMapModel.prototype.loadUrl = function (jsonUrl){
             this.swagItemModels.push(new SwagItemModel(dataitems.items[i]));
         }
     }
-    this.trigger("request");
+    this.trigger("loaded");
     }.bind(this));
 }
 
