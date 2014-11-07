@@ -20,3 +20,4 @@ SwagItemModel.prototype.getSwagItemData = function(){
 }
 
 module.exports = SwagItemModel;
+

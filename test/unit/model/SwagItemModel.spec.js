@@ -1,7 +1,7 @@
 var SwagItemModel = require("../../../src/model/SwagItemModel");
 
 describe("SwagItemModel", function() {
-	it("can be created from data", function() {
+	/*it("can be created from data", function() {
 		var jsonData = {
 			x: 20,
 			y: 21
@@ -12,9 +12,9 @@ describe("SwagItemModel", function() {
 
 		expect(data.getX()).toBe(20);
 		expect(data.getY()).toBe(21);
-	});
+	});*/
 
-	/*it("can check if an xAPI statement matches", function() {
+	it("can check if an xAPI statement matches", function() {
 		var jsonData = {
 			x: 20,
 			y: 21,
@@ -63,5 +63,5 @@ describe("SwagItemModel", function() {
 
 		swagItemModel.handleXApiStatement(xApiStatement);
 		expect(swagItemModel.getSwagItemData().isComplete()).toBe(true);
-	});*/
+	});
 });

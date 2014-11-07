@@ -22,19 +22,6 @@ inherits(SwagMapModel, EventDispatcher);
  */
 
 /**
-<<<<<<< HEAD
-*  This function decides whether to load JSON from a local file or a url
-*  @method loadFile
-*/
-SwagMapModel.prototype.load = function(pathOrURL) {
-    var parsedPathOrURL = url.parse(pathOrURL);
-    if (parsedPathOrURL.protocol)
-    {
-        this.loadUrl(parsedPathOrURL)
-    }
-    else 
-    {
-=======
  * This function will look at its parameter and determine if it is a
  * local file or a url. It will then make the appropriate request
  * to load the specified resource.
@@ -46,19 +33,13 @@ SwagMapModel.prototype.load = function(pathOrURL) {
     if (typeof window !== "undefined" || parsedPathOrURL.protocol) {
         this.loadUrl(pathOrURL)
     } else {
->>>>>>> 9fd59ba0889b4ff763bcfc8f7322b9a0dad68458
         this.loadFile(pathOrURL)
     }
 }
 
 /**
-<<<<<<< HEAD
- *  This function loads JSON from a local file
- *  @method loadFile
-=======
  * This function loads a local JSON file and stores the list of items.
  * @method loadFile
->>>>>>> 9fd59ba0889b4ff763bcfc8f7322b9a0dad68458
  */
 SwagMapModel.prototype.loadFile = function(jsonPath) {
     fs.readFile(jsonPath, function(err, data) {
@@ -77,12 +58,6 @@ SwagMapModel.prototype.loadFile = function(jsonPath) {
 }
 
 /**
-<<<<<<< HEAD
-*  This function loads A JSON from a url
-*  @method loadUrl
-*/
-SwagMapModel.prototype.loadUrl = function (jsonUrl){
-=======
  * This function loads a local JSON file and stores the list of items.
  * @method loadUrl
  */
@@ -99,7 +74,6 @@ SwagMapModel.prototype.loadUrl = function(jsonUrl) {
 
     console.log("loading: " + jsonUrl);
 
->>>>>>> 9fd59ba0889b4ff763bcfc8f7322b9a0dad68458
     var options = {
         url: jsonUrl,
     };
