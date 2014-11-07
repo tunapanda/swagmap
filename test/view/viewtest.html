@@ -13,6 +13,7 @@
 
 		<script>
 			var view=new swagmap.SwagMapView();
+			view.install();
 
 			var item1=new swagmap.SwagItemData(50,100);
 			var item2=new swagmap.SwagItemData(200,150);
@@ -20,20 +21,6 @@
 			view.addSwagItem(item1);
 			view.addSwagItem(item2);
 			view.addConnection(item1, item2);
-			
-			
-			function setup() {
-				console.log("setup");
-				view.setup();
-			};
-
-			function draw() {
-				view.draw();
-			};
-
-			function windowResized() {
-				view.windowResized();
-			}
 		</script>
 	</head>
 	<body>

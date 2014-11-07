@@ -19,18 +19,18 @@ SwagMapView.prototype.addSwagItem = function(swagItemData) {
 }
 
 /**
-*  creates a connection between two Swag items
-*  @method addConnection
-*/
-SwagMapView.prototype.addConnection = function(swagItem1, swagItem2){
-    this.swagConnection = new SwagConnectionView(swagItem1, swagItem2);
+ *  creates a connection between two Swag items
+ *  @method addConnection
+ */
+SwagMapView.prototype.addConnection = function(swagItem1, swagItem2) {
+	this.swagConnection = new SwagConnectionView(swagItem1, swagItem2);
 }
+
 /**
  * Do the setup.
  * @method setup
  */
 SwagMapView.prototype.setup = function() {
-	console.log("setting up... SwagConnectionView="+SwagConnectionView);
 	createCanvas(windowWidth - 1, windowHeight - 1);
 }
 
@@ -42,7 +42,7 @@ SwagMapView.prototype.draw = function() {
 	background(0, 0, 0);
 
 	textSize(32);
-	text("Tunapanda Swag",15,35);
+	text("Tunapanda Swag", 15, 35);
 
 	stroke(255, 255, 255);
 	line(0, 50, windowWidth, 50);
@@ -50,8 +50,8 @@ SwagMapView.prototype.draw = function() {
 	for (var i = 0; i < this.swagItemViews.length; i++)
 		this.swagItemViews[i].draw();
 
-    if (this.swagConnection)
-        this.swagConnection.draw();
+	if (this.swagConnection)
+		this.swagConnection.draw();
 }
 
 /**
@@ -60,6 +60,17 @@ SwagMapView.prototype.draw = function() {
  */
 SwagMapView.prototype.windowResized = function() {
 	resizeCanvas(windowWidth, windowHeight);
+}
+
+/**
+ * Install this view to set the global p5js function to
+ * point to functions in this instance.
+ * @method install
+ */
+SwagMapView.prototype.install = function() {
+	draw = this.draw.bind(this);
+	setup = this.setup.bind(this);
+	windowResized = this.windowResized.bind(this);
 }
 
 module.exports = SwagMapView;

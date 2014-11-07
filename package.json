@@ -11,13 +11,14 @@
   "devDependencies": {
     "async": "^0.9.0",
     "browserify": "^6.1.0",
+    "fs-extra": "^0.12.0",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "inherits": "^2.0.1",
     "jasmine-node": "^2.0.0-beta4",
     "qsub": "0.0.6",
-    "request": "^2.47.0",
-    "yuidocjs": "^0.3.50",
+    "request": "2.40.0",
+    "yuidocjs": "git+https://github.com/limikael/yuidoc.git",
     "yuidocjs-die-on-warnings": "0.0.1"
   }
 }

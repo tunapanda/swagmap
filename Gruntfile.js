@@ -1,6 +1,7 @@
 var qsub = require("qsub");
 var async = require("async");
 var fs = require("fs");
+var fse = require("fs-extra");
 
 module.exports = function(grunt) {
 	grunt.initConfig({
@@ -37,7 +38,7 @@ module.exports = function(grunt) {
 
 			function(next) {
 				var job = new qsub("./node_modules/.bin/browserify");
-				job.arg("-o", "test/swagmap.bundle.js", "src/swagmap.js");
+				job.arg("--debug", "-o", "test/view/swagmap.bundle.js", "src/swagmap.js");
 				job.show().expect(0);
 
 				job.run().then(next, grunt.fail.fatal);
@@ -57,7 +58,7 @@ module.exports = function(grunt) {
 		job.show().expect(0);
 		job.run().then(
 			function() {
-				fs.writeFileSync("doc/tunapanda.png", fs.readFileSync("res/yuidoc/tunapanga.png"));
+				fse.copySync("res/yuidoc/tunapanda.png", "doc/tunapanda.png");
 				done();
 			},
 
@@ -126,7 +127,7 @@ module.exports = function(grunt) {
 
 			function(next) {
 				var job = qsub("zip");
-				job.arg("-r", "demo.zip", "test");
+				job.arg("-r", "demo.zip", "test/view");
 				job.expect(0);
 				job.run().then(next, grunt.fail.fatal);
 			},
