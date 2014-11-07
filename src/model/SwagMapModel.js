@@ -16,7 +16,7 @@ inherits(SwagMapModel, EventDispatcher);
 
 
 /**
-*  This function loads a local JSON file 
+*  This function decides whether to load JSON from a local file or a url
 *  @method loadFile
 */
 SwagMapModel.prototype.load = function(pathOrURL) {
@@ -27,13 +27,12 @@ SwagMapModel.prototype.load = function(pathOrURL) {
     }
     else 
     {
-
         this.loadFile(pathOrURL)
     } 
 }
 
 /**
- *  This function loads the JSON file and returns a list of items
+ *  This function loads JSON from a local file
  *  @method loadFile
  */
 SwagMapModel.prototype.loadFile = function(jsonPath) {
@@ -53,7 +52,7 @@ SwagMapModel.prototype.loadFile = function(jsonPath) {
 }
 
 /**
-*  This function loads A JSON file from a url
+*  This function loads A JSON from a url
 *  @method loadUrl
 */
 SwagMapModel.prototype.loadUrl = function (jsonUrl){
