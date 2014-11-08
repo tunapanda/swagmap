@@ -65,6 +65,7 @@ SwagMapView.prototype.windowResized = function() {
 /**
  * Install this view to set the global p5js function to
  * point to functions in this instance.
+ * @method install
  */
 SwagMapView.prototype.install = function() {
 	draw = this.draw.bind(this);
