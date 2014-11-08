@@ -1,6 +1,7 @@
 var qsub = require("qsub");
 var async = require("async");
 var fs = require("fs");
+var fse = require("fs-extra");
 
 module.exports = function(grunt) {
 	grunt.initConfig({
@@ -57,7 +58,7 @@ module.exports = function(grunt) {
 		job.show().expect(0);
 		job.run().then(
 			function() {
-				fs.writeFileSync("doc/tunapanda.png", fs.readFileSync("res/yuidoc/tunapanga.png"));
+				fse.copySync("res/yuidoc/tunapanda.png","doc/tunapanda.png");
 				done();
 			},
 
