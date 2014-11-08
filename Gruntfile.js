@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 
 			function(next) {
 				var job = new qsub("./node_modules/.bin/browserify");
-				job.arg("-o", "test/swagmap.bundle.js", "src/swagmap.js");
+				job.arg("-o", "test/view/swagmap.bundle.js", "src/swagmap.js");
 				job.show().expect(0);
 
 				job.run().then(next, grunt.fail.fatal);
@@ -127,7 +127,7 @@ module.exports = function(grunt) {
 
 			function(next) {
 				var job = qsub("zip");
-				job.arg("-r", "demo.zip", "test");
+				job.arg("-r", "demo.zip", "test/view");
 				job.expect(0);
 				job.run().then(next, grunt.fail.fatal);
 			},
