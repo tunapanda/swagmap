@@ -5,13 +5,15 @@ Current
 -------
 
 * Create the controller. The controller should tell the model to load iself, then take the data from the model and populate the view.
+* Use [TinCanJS](https://github.com/RusticiSoftware/TinCanJS) to connect to the LRS to get data for which swagifacts that should be displayed as completed or not completed.
+* Add a label to the swagifacts.
 
 Planned
 -------
 
-* Use [TinCanJS](https://github.com/RusticiSoftware/TinCanJS) to connect to the LRS to get data for which swagifacts that should be displayed as completed or not completed.
-* Think about how the swagifacts should be displayed. Should there be an icon? Should there be a text?
 * Make the swagifacts clickable. Each swagifact should have a url defined inside of them.
+* Make 3 badges on top of the swagifacts to show performance. We can use green dots to start with.
+* Each completed swagifact should show the score.
 
 Completed
 ---------
