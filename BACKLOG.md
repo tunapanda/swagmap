@@ -8,7 +8,8 @@ Current
   and populate the view.
 
 * Create the function `handleXApiStatement(xApiStatement)` in `SwagItemModel`. This function will take the data for
-  one xAPI statement and make relevant changes to itself.
+  one xAPI statement and make relevant changes to itself. There is a (commendet out) test for this here:
+  https://github.com/tunapanda/swagmap/blob/master/test/unit/model/SwagItemModel.spec.js
 
 * Create the function `handleXApiStatement(xApiStatement)` in `SwagModel`. This function will take the data for
   one xAPI statement and make relevant changes to all the items in the model.
