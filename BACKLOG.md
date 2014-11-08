@@ -6,6 +6,7 @@ Current
 
 * Create the controller. The controller should tell the model to load iself, then take the data from the model
   and populate the view.
+
 * Create the function `handleXApiStatement(xApiStatement)` in `SwagModel`. This function will take the data for
   one xAPI statement and make relevant changes to the model.
 * Use [TinCanJS](https://github.com/RusticiSoftware/TinCanJS) to connect to the LRS to get data for which
