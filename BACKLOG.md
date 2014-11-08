@@ -4,9 +4,6 @@ Swagmap Backlog
 Current
 -------
 
-* Create the controller. The controller should tell the model to load iself, then take the data from the model
-  and populate the view.
-
 * Create the function `handleXApiStatement(xApiStatement)` in `SwagItemModel`. This function will take the data for
   one xAPI statement and make relevant changes to itself. There is a (commented out) test for this here:
   https://github.com/tunapanda/swagmap/blob/master/test/unit/model/SwagItemModel.spec.js
@@ -36,6 +33,8 @@ Planned
 
 Completed
 ---------
+* Create the controller. The controller should tell the model to load iself, then take the data from the model
+  and populate the view.
 * Create connections between Swagifacts.
 * Swagifacts should be displayed as completed or not completed.
 * Create the model. The model should be usable like this:
