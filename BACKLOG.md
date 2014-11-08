@@ -4,8 +4,19 @@ Swagmap Backlog
 Current
 -------
 
-* Create the controller. The controller should tell the model to load iself, then take the data from the model and populate the view.
-* Use [TinCanJS](https://github.com/RusticiSoftware/TinCanJS) to connect to the LRS to get data for which swagifacts that should be displayed as completed or not completed.
+* Create the controller. The controller should tell the model to load iself, then take the data from the model
+  and populate the view.
+* Use [TinCanJS](https://github.com/RusticiSoftware/TinCanJS) to connect to the LRS to get data for which
+  swagifacts that should be displayed as completed or not completed.
+
+  * Add the function `setXApiEndpoint(url, username, password)` to the model. This function should just store 
+    the information.
+  * Add the function `loadXApiData()` to the model. This function should look at the `object` for each
+    `SwagItemModel` and make relevant calls to the xAPI backend. It should then look at the replies for 
+    those calls and make relevant updates to the `SwagItemModel`s. The the process is complete, the model
+    should dispatch an `update` event.
+  * Make relevant tests for these functions.
+
 * Add a label to the swagifacts.
 
 Planned
