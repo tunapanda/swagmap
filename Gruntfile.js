@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 
 			function(next) {
 				var job = new qsub("./node_modules/.bin/browserify");
-				job.arg("-o", "test/view/swagmap.bundle.js", "src/swagmap.js");
+				job.arg("--debug", "-o", "test/view/swagmap.bundle.js", "src/swagmap.js");
 				job.show().expect(0);
 
 				job.run().then(next, grunt.fail.fatal);
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
 		job.show().expect(0);
 		job.run().then(
 			function() {
-				fse.copySync("res/yuidoc/tunapanda.png","doc/tunapanda.png");
+				fse.copySync("res/yuidoc/tunapanda.png", "doc/tunapanda.png");
 				done();
 			},
 

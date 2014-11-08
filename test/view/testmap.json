@@ -1,14 +1,19 @@
 {
   "title": "Tunapanda Typing Swag",
   "items": [{
-    "x": 40,
-    "y": 20,
+    "x": 150,
+    "y": 200,
     "label": "Level 1",
     "object": "http://some/xapi/activity"
   }, {
-    "x": 60,
-    "y": 30,
+    "x": 250,
+    "y": 210,
     "label": "Level 2",
+    "object": "http://some/other/xapi/activity"
+  }, {
+    "x": 360,
+    "y": 190,
+    "label": "Level 3",
     "object": "http://some/other/xapi/activity"
   }]
 }
