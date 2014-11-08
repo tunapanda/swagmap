@@ -4,13 +4,26 @@ Swagmap Backlog
 Current
 -------
 
-* Create the model. The model should be usable like this:
+* Define the .json to be loaded by the swagmap app. Suggestion:
 ````
-var m=new SwagMapModel();
-m.loadSwagMap("swagmap.json");
-m.on("loaded",function() {
-    m.getSwagItems();
-});
+{
+  title: "Tunapanda Typing Swag",
+  items: [
+    {
+      x: 40,
+      y: 20,
+      label: "Level 1",
+      object: "http://some/xapi/activity"
+    },
+
+    {
+      x: 60,
+      y: 30,
+      label: "Level 2",
+      object: "http://some/other/xapi/activity"
+    },
+  ]
+}
 ````
 * Create the controller. The controller should tell the model to load iself, then take the data from the model and populate the view.
 
@@ -24,5 +37,12 @@ Planned
 Completed
 ---------
 * Create connections between Swagifacts.
-* Define the .json to be loaded by swagmap app.
 * Swagifacts should be displayed as completed or not completed.
+* Create the model. The model should be usable like this:
+````
+var m=new SwagMapModel();
+m.loadSwagMap("swagmap.json");
+m.on("loaded",function() {
+    m.getSwagItems();
+});
+````
