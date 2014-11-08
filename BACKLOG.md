@@ -24,6 +24,9 @@ Current
 
 * Add a label to the swagifacts.
 
+* Create a view test that loads sample data from the xAPI store at:
+  http://staging.tunapanda.org/learninglocker/public/
+
 Planned
 -------
 
