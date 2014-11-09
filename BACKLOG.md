@@ -4,10 +4,6 @@ Swagmap Backlog
 Current
 -------
 
-* Create the function `handleXApiStatement(xApiStatement)` in `SwagItemModel`. This function will take the data for
-  one xAPI statement and make relevant changes to itself. There is a (commented out) test for this here:
-  https://github.com/tunapanda/swagmap/blob/master/test/unit/model/SwagItemModel.spec.js
-
 * Create the function `handleXApiStatement(xApiStatement)` in `SwagModel`. This function will take the data for
   one xAPI statement and make relevant changes to all the items in the model.
 
@@ -49,3 +45,6 @@ m.on("loaded",function() {
 });
 ````
 * Define the .json to be loaded by the swagmap app. Suggestion is at: https://github.com/tunapanda/swagmap/blob/master/test/view/testmap.json
+* Create the function `handleXApiStatement(xApiStatement)` in `SwagItemModel`. This function will take the data for
+  one xAPI statement and make relevant changes to itself. There is a (commented out) test for this here:
+  https://github.com/tunapanda/swagmap/blob/master/test/unit/model/SwagItemModel.spec.js
