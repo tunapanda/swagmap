@@ -47,13 +47,9 @@ SwagMapModel.prototype.loadFile = function(jsonPath) {
             console.log("Error" + err);
             return;
         }
-        var dataitems = JSON.parse(data);
-        for (var i = 0; i < dataitems.items.length; i++) {
-            this.swagItemModels.push(new SwagItemModel(dataitems.items[i]));
-        }
 
+        this.parseSwagMapDefinition(data.toString());
         this.trigger("loaded");
-
     }.bind(this));
 }
 
@@ -81,14 +77,28 @@ SwagMapModel.prototype.loadUrl = function(jsonUrl) {
         console.log("loaded, error: " + error); //response.statusCode);
 
         if (!error && response.statusCode == 200) {
-            var dataitems = JSON.parse(body);
-            for (var i = 0; i < dataitems.items.length; i++) {
-                this.swagItemModels.push(new SwagItemModel(dataitems.items[i]));
-            }
+            this.parseSwagMapDefinition(body.toString());
         }
 
         this.trigger("loaded");
     }.bind(this));
+}
+
+/**
+ * Parse a swag map definition. This function tries to be tolerant and
+ * accept parsed and unparsed json. It is importand however that nothing
+ * gets passed in that is an object that is "kind of" a string, but not
+ * actually a string. In that case use toString() on the object first.
+ * @method parseSwagMapDefinition
+ * @param {Object} data The string or object containing the definition.
+ */
+SwagMapModel.prototype.parseSwagMapDefinition = function(data) {
+    if (typeof data == "string")
+        data = JSON.parse(data);
+
+    for (var i = 0; i < data.items.length; i++) {
+        this.swagItemModels.push(new SwagItemModel(data.items[i]));
+    }
 }
 
 /**
