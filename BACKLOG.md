@@ -7,6 +7,9 @@ Current
 * Create the function `handleXApiStatement(xApiStatement)` in `SwagModel`. This function will take the data for
   one xAPI statement and make relevant changes to all the items in the model.
 
+* Create a new viewtest based on https://github.com/tunapanda/swagmap/blob/master/test/view/controllertest.html
+  that calls `handleXApiStatement` based on some dummy data. The completed items should show up as completed.
+
 * Use [TinCanJS](https://github.com/RusticiSoftware/TinCanJS) to connect to the LRS to get data for which
   swagifacts that should be displayed as completed or not completed.
 
