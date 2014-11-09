@@ -64,4 +64,32 @@ describe("SwagItemModel", function() {
 		swagItemModel.handleXApiStatement(xApiStatement);
 		expect(swagItemModel.getSwagItemData().isComplete()).toBe(true);
 	});*/
+
+	/*it("checks so that the object and verb matches",function() {
+		var jsonData = {
+			x: 20,
+			y: 21,
+			object: "http://example.com/activity"
+		};
+
+		var swagItemModel = new SwagItemModel(jsonData);
+
+		// This is related to another activity, it should not affect the completion.
+		xApiStatement = {
+			"actor": {
+				"mbox": "test@example.com"
+			},
+
+			"verb": {
+				"id": "http://adlnet.gov/expapi/verbs/completed/"
+			},
+
+			"object": {
+				"id": "http://example.com/some/other/activity"
+			}
+		};
+
+		swagItemModel.handleXApiStatement(xApiStatement);
+		expect(swagItemModel.getSwagItemData().isComplete()).toBe(false);
+	});*/
 });
