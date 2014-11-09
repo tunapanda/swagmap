@@ -5,7 +5,7 @@ var request = require("request");
 var fs = require("fs");
 
 describe("SwagMapModel", function() {
-/*	it("can dispatch events", function() {
+	it("can dispatch events", function() {
 		var m = new SwagMapModel();
 		var spy = jasmine.createSpy();
 
@@ -67,5 +67,5 @@ describe("SwagMapModel", function() {
 		});
 
 		m.load("http://localhost:2345/file.json");
-	});*/
+	});
 });
