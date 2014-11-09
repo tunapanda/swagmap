@@ -2,9 +2,12 @@
  * Information about one swag item.
  * @class SwagItemData
  */
-function SwagItemData(x, y) {
+function SwagItemData(x, y, object, completed) {
 	this.x = x;
 	this.y = y;
+	this.object = object;
+	this.completed = completed;
+
 }
 
 /**
@@ -24,5 +27,9 @@ SwagItemData.prototype.getY=function() {
 }
 
 
+SwagItemData.prototype.isComplete = function (){
+
+	return this.completed;
+}
 
 module.exports = SwagItemData;
