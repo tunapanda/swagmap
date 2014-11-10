@@ -10,10 +10,10 @@ Current
 * Add the function `setXApiEndpoint(url, username, password)` to the model. This function should create an instance
   of TinCanJS. Add the function `getTinCan` to retreive this instance.
 
-* Create the function `updateCompletion` to SwagItemModel. This function should make an xAPI call and update its
+* Add the function `updateCompletion` to SwagItemModel. This function should make an xAPI call and update its
   completion state depending on the result. It should dispatch an "update" event when it is done.
 
-* Create the function `updateCompletion` to SwagMapModel. This function should call `updateCompletion` on all
+* Add the function `updateCompletion` to SwagMapModel. This function should call `updateCompletion` on all
   the SwagItemModel:s for the SwagMapModel.
 
 * Add a label to the swagifacts.
