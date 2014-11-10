@@ -4,22 +4,17 @@ Swagmap Backlog
 Current
 -------
 
-* Create the function `handleXApiStatement(xApiStatement)` in `SwagModel`. This function will take the data for
-  one xAPI statement and make relevant changes to all the items in the model.
-
 * Create a new viewtest based on https://github.com/tunapanda/swagmap/blob/master/test/view/controllertest.html
   that calls `handleXApiStatement` based on some dummy data. The completed items should show up as completed.
 
-* Use [TinCanJS](https://github.com/RusticiSoftware/TinCanJS) to connect to the LRS to get data for which
-  swagifacts that should be displayed as completed or not completed.
+* Add the function `setXApiEndpoint(url, username, password)` to the model. This function should create an instance
+  of TinCanJS. Add the function `getTinCan` to retreive this instance.
 
-  * Add the function `setXApiEndpoint(url, username, password)` to the model. This function should just store 
-    the information.
-  * Add the function `loadXApiData()` to the model. This function should look at the `object` for each
-    `SwagItemModel` and make relevant calls to the xAPI backend. It should then take the replies and
-    call the `handleXApiStatement` function to update the model. When the process is complete, the model
-    should dispatch an `update` event.
-  * Make relevant tests for these functions.
+* Create the function `updateCompletion` to SwagItemModel. This function should make an xAPI call and update its
+  completion state depending on the result. It should dispatch an "update" event when it is done.
+
+* Create the function `updateCompletion` to SwagMapModel. This function should call `updateCompletion` on all
+  the SwagItemModel:s for the SwagMapModel.
 
 * Add a label to the swagifacts.
 
