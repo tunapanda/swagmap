@@ -55,7 +55,7 @@ describe("SwagItemModel", function() {
 		expect(swagItemModel.getSwagItemData().isComplete()).toBe(true);
 	});
 
-	it("checks so that the object and verb matches",function() {
+	it("checks so that the object and verb matches", function() {
 		var jsonData = {
 			x: 20,
 			y: 21,
@@ -77,4 +77,43 @@ describe("SwagItemModel", function() {
 		swagItemModel.handleXApiStatement(xApiStatement);
 		expect(swagItemModel.getSwagItemData().isComplete()).toBe(false);
 	});
+
+	/*it("can update completion by calling xAPI", function() {
+		var mockTinCan = {};
+		mockTinCan.getStatements = function(o) {
+			o.callback(null, {
+				statements: [{
+					"actor": {
+						"mbox": "test@example.com"
+					},
+					"verb": {
+						"id": "http://adlnet.gov/expapi/verbs/completed/"
+					},
+					"object": {
+						"id": "http://example.com/activity"
+					}
+				}]
+			});
+		};
+
+		var mockSwagMapModel = {};
+		mockSwagMapModel.getTinCan = function() {
+			return mockTinCan;
+		}
+
+		var data = {
+			x: 20,
+			y: 21,
+			object: "http://example.com/activity"
+		}
+
+		var updateSpy = jasmine.createSpy();
+		var swagItemModel = new SwagItemModel(data);
+		swagItemModel.setSwagMapModel(mockSwagMapModel);
+		swagItemModel.on("update", updateSpy);
+		swagItemModel.updateCompletion();
+
+		expect(updateSpy).toHaveBeenCalled();
+		expect(swagItemModel.getSwagItemData().isComplete()).toBe(true);
+	});*/
 });
