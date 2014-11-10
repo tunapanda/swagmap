@@ -1,4 +1,4 @@
-var EventDispatcher = require("../utils/EventDispatcher");
+var EventDispatcher = require("yaed");
 var inherits = require("inherits");
 var fs = require("fs");
 var SwagItemModel = require("./SwagItemModel");
