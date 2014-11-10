@@ -97,7 +97,9 @@ SwagMapModel.prototype.parseSwagMapDefinition = function(data) {
         data = JSON.parse(data);
 
     for (var i = 0; i < data.items.length; i++) {
-        this.swagItemModels.push(new SwagItemModel(data.items[i]));
+        var swagItemModel = new SwagItemModel(data.items[i]);
+        swagItemModel.setSwagMapModel(this);
+        this.swagItemModels.push(swagItemModel);
     }
 }
 
