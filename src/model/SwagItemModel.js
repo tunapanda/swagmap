@@ -1,4 +1,6 @@
+var EventDispatcher = require("yaed");
 var SwagItemData = require("../data/SwagItemData");
+var inherits = require("inherits");
 /**
  * This is resposible for creating an item model using jsondata
  * @class SwagItemModel
@@ -10,6 +12,7 @@ function SwagItemModel(jsondata) {
 	this.completed = false;
 	this.swagMapModel = null;
 }
+inherits(SwagItemModel, EventDispatcher);
 
 /**
  *  This gets the swagItemData from the jsondata
@@ -41,7 +44,28 @@ SwagItemModel.prototype.handleXApiStatement = function(xApiStament) {
  * @method setSwagMapModel
  */
 SwagItemModel.prototype.setSwagMapModel = function(swagMapModel) {
-	this.swagMapModel = swagMapModel
+	this.swagMapModel = swagMapModel;
+}
+
+/**
+*  Update the completion of an activity 
+*  @method updateCompletion
+*/
+SwagItemModel.prototype.updateCompletion = function(){
+	var tincan = this.swagMapModel.getTinCan();
+	var statements = [];
+	console.log("WE ARE HERE");
+	tincan.getStatements({
+		callback: function(err, result){
+			for (var i = 0; i < result.statements.length; i++){
+				statements[i] = result.statements[i];
+			}
+		}
+	});
+	for (var i = 0; i < statements.length; i++){
+		this.handleXApiStatement(statements[i]);
+	}
+	this.trigger("update");
 }
 
 module.exports = SwagItemModel;
