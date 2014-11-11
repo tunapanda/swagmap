@@ -1,4 +1,5 @@
 var SwagItemModel = require("../../../src/model/SwagItemModel");
+var TinCan = require("tincanjs");
 
 describe("SwagItemModel", function() {
 	it("can be created from data", function() {
@@ -81,6 +82,12 @@ describe("SwagItemModel", function() {
 	it("can update completion by calling xAPI", function() {
 		var mockTinCan = {};
 		mockTinCan.getStatements = function(o) {
+			expect(o.params.agent).toEqual(jasmine.any(TinCan.Agent));
+			expect(o.params.activity).toEqual(jasmine.any(TinCan.Activity));
+
+			expect(o.params.agent.mbox).toEqual("mailto:hello@example.com");
+			expect(o.params.activity.id).toEqual("http://example.com/activity");
+
 			o.callback(null, {
 				statements: [{
 					"actor": {
@@ -99,6 +106,10 @@ describe("SwagItemModel", function() {
 		var mockSwagMapModel = {};
 		mockSwagMapModel.getTinCan = function() {
 			return mockTinCan;
+		}
+
+		mockSwagMapModel.getActorEmail = function() {
+			return "hello@example.com";
 		}
 
 		var data = {
