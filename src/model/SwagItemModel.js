@@ -1,6 +1,7 @@
 var EventDispatcher = require("yaed");
 var SwagItemData = require("../data/SwagItemData");
 var inherits = require("inherits");
+var Tincan = require("tincanjs");
 /**
  * This is resposible for creating an item model using jsondata
  * @class SwagItemModel
@@ -54,8 +55,15 @@ SwagItemModel.prototype.setSwagMapModel = function(swagMapModel) {
 SwagItemModel.prototype.updateCompletion = function(){
 	var tincan = this.swagMapModel.getTinCan();
 	var statements = [];
-	console.log("WE ARE HERE");
 	tincan.getStatements({
+		params: {
+			"agent": new Tincan.Agent({
+				"mbox":"mailto:hello@example.com"
+			}),
+			"activity": new Tincan.Activity({
+				"id": "http://example.com/activity"
+			})
+		},
 		callback: function(err, result){
 			for (var i = 0; i < result.statements.length; i++){
 				statements[i] = result.statements[i];
