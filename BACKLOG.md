@@ -4,6 +4,12 @@ Swagmap Backlog
 Current
 -------
 
+* Add a label to the swagifacts.
+
+* Make it possible to set the title of the swagmap in the .json file.
+
+* Create a view test that shows connections based on data from the .json file.
+
 * Create a new viewtest based on https://github.com/tunapanda/swagmap/blob/master/test/view/controllertest.html
   that calls `handleXApiStatement` based on some dummy data. The completed items should show up as completed.
 
@@ -15,8 +21,6 @@ Current
 
 * Add the function `updateCompletion` to SwagMapModel. This function should call `updateCompletion` on all
   the SwagItemModel:s for the SwagMapModel.
-
-* Add a label to the swagifacts.
 
 * Create a view test that loads sample data from the xAPI store at:
   http://staging.tunapanda.org/learninglocker/public/
