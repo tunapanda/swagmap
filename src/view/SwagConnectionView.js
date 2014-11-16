@@ -4,8 +4,8 @@
 */
 
 function SwagConnectionView(swagItem1, swagItem2){
-    this.swagItem1 = swagItem1;
-    this.swagItem2 = swagItem2;
+/*    this.swagItem1 = swagItem1;
+    this.swagItem2 = swagItem2;*/
 }
 
 /**
@@ -14,7 +14,7 @@ function SwagConnectionView(swagItem1, swagItem2){
 */
 
 SwagConnectionView.prototype.draw = function(){
-    item1 = [this.swagItem1.getX(), this.swagItem1.getY()];
+/*    item1 = [this.swagItem1.getX(), this.swagItem1.getY()];
     item2 = [this.swagItem2.getX(), this.swagItem2.getY()];
     
     var connected = true;
@@ -22,7 +22,7 @@ SwagConnectionView.prototype.draw = function(){
     {
         stroke(255);
         line(item1[0], item1[1], item2[0], item2[1]);
-    }
+    }*/
 }
 
 module.exports=SwagConnectionView;

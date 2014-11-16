@@ -19,7 +19,7 @@ describe("SwagMapModel", function() {
 		var m = new SwagMapModel();
 
 		m.on("loaded", function() {
-			expect(m.getItemDatas().length).toBe(3);
+			expect(m.getSwagItemModels().length).toBe(3);
 			done();
 		});
 

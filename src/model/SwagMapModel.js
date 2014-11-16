@@ -104,20 +104,6 @@ SwagMapModel.prototype.parseSwagMapDefinition = function(data) {
 }
 
 /**
- * This function gets data items from swagItemModels
- * @method getItemDatas
- */
-SwagMapModel.prototype.getItemDatas = function() {
-    var itemDatas = [];
-    for (var i = 0; i < this.swagItemModels.length; i++) {
-        var x = this.swagItemModels[i].x;
-        var y = this.swagItemModels[i].y;
-        itemDatas.push(this.swagItemModels[i].getSwagItemData(x, y));
-    }
-    return itemDatas;
-}
-
-/**
  * This function gets swag item models
  * @method getSwagItemModels
  */
