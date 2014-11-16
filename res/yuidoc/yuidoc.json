@@ -6,6 +6,6 @@
 	"options": {
 		"outdir": "doc",
 		"paths": "src",
-		"preprocessor": "yuidocjs-die-on-warnings"
+		"preprocessor": "yuidoc-die-on-warnings"
 	}
 }
