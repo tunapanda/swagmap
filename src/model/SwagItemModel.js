@@ -49,28 +49,28 @@ SwagItemModel.prototype.setSwagMapModel = function(swagMapModel) {
 }
 
 /**
-*  Update the completion of an activity 
-*  @method updateCompletion
-*/
-SwagItemModel.prototype.updateCompletion = function(){
+ *  Update the completion of an activity
+ *  @method updateCompletion
+ */
+SwagItemModel.prototype.updateCompletion = function() {
 	var tincan = this.swagMapModel.getTinCan();
 	var statements = [];
 	tincan.getStatements({
 		params: {
 			"agent": new Tincan.Agent({
-				"mbox":"mailto:hello@example.com"
+				"mbox": "mailto:" + this.swagMapModel.getActorEmail()
 			}),
 			"activity": new Tincan.Activity({
-				"id": "http://example.com/activity"
+				"id": this.object
 			})
 		},
-		callback: function(err, result){
-			for (var i = 0; i < result.statements.length; i++){
+		callback: function(err, result) {
+			for (var i = 0; i < result.statements.length; i++) {
 				statements[i] = result.statements[i];
 			}
 		}
 	});
-	for (var i = 0; i < statements.length; i++){
+	for (var i = 0; i < statements.length; i++) {
 		this.handleXApiStatement(statements[i]);
 	}
 	this.trigger("update");
