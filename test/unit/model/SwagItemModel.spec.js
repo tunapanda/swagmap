@@ -91,7 +91,7 @@ describe("SwagItemModel", function() {
 			o.callback(null, {
 				statements: [{
 					"actor": {
-						"mbox": "hello@example.com"
+						"mbox": "test@example.com"
 					},
 					"verb": {
 						"id": "http://adlnet.gov/expapi/verbs/completed/"
@@ -116,55 +116,6 @@ describe("SwagItemModel", function() {
 			x: 20,
 			y: 21,
 			object: "http://example.com/activity"
-		}
-
-		var updateSpy = jasmine.createSpy();
-		var swagItemModel = new SwagItemModel(data);
-		swagItemModel.setSwagMapModel(mockSwagMapModel);
-		swagItemModel.on("update", updateSpy);
-		swagItemModel.updateCompletion();
-
-		expect(updateSpy).toHaveBeenCalled();
-		expect(swagItemModel.getSwagItemData().isComplete()).toBe(true);
-	});
-
-	it("can update completion by calling xAPI for another user and activity", function() {
-		var mockTinCan = {};
-		mockTinCan.getStatements = function(o) {
-			expect(o.params.agent).toEqual(jasmine.any(TinCan.Agent));
-			expect(o.params.activity).toEqual(jasmine.any(TinCan.Activity));
-
-			expect(o.params.agent.mbox).toEqual("mailto:someoneelse@example.com");
-			expect(o.params.activity.id).toEqual("http://example.com/some/other/activity");
-
-			o.callback(null, {
-				statements: [{
-					"actor": {
-						"mbox": "someoneelse@example.com"
-					},
-					"verb": {
-						"id": "http://adlnet.gov/expapi/verbs/completed/"
-					},
-					"object": {
-						"id": "http://example.com/some/other/activity"
-					}
-				}]
-			});
-		};
-
-		var mockSwagMapModel = {};
-		mockSwagMapModel.getTinCan = function() {
-			return mockTinCan;
-		}
-
-		mockSwagMapModel.getActorEmail = function() {
-			return "someoneelse@example.com";
-		}
-
-		var data = {
-			x: 20,
-			y: 21,
-			object: "http://example.com/some/other/activity"
 		}
 
 		var updateSpy = jasmine.createSpy();
