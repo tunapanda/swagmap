@@ -21,6 +21,6 @@
     "tincanjs": "^0.31.0",
     "yaed": "^1.0.0",
     "yuidocjs": "git+https://github.com/limikael/yuidoc.git",
-    "yuidocjs-die-on-warnings": "0.0.1"
+    "yuidoc-die-on-warnings": "0.0.1"
   }
 }

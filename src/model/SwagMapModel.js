@@ -6,12 +6,25 @@ var http = require("http");
 var url = require("url");
 var request = require('request');
 
+// This is something quite ugly, it's a hack workaround...
+// The Node version of Tincan doesn't work without it...
+if (!process.versions) {
+    process.versions = {
+        node: "not_node"
+    }
+}
+
+var TinCan = require("tincanjs");
+
 /**
  * Main swag map model.
  * @class SwagMapModel
  */
 function SwagMapModel() {
     this.swagItemModels = [];
+    this.mapUrl = null;
+    this.actorEmail = null;
+    this.tinCan = null;
 }
 
 inherits(SwagMapModel, EventDispatcher);
@@ -22,24 +35,71 @@ inherits(SwagMapModel, EventDispatcher);
  */
 
 /**
+ * Set map url.
+ * @method setMapUrl
+ */
+SwagMapModel.prototype.setMapUrl = function(value) {
+    this.mapUrl = value;
+}
+
+/**
+ * Set map url.
+ * @method setMapUrl
+ */
+SwagMapModel.prototype.setXApiStore = function(parameters) {
+    this.tinCan = new TinCan({
+        recordStores: [parameters]
+    });
+}
+
+/**
+ * Set actor email.
+ * @method setActorEmail
+ */
+SwagMapModel.prototype.setActorEmail = function(value) {
+    this.actorEmail = value;
+}
+
+/**
+ * Get tin can reference.
+ * @method getTinCan
+ */
+SwagMapModel.prototype.getTinCan = function() {
+    return this.tinCan;
+}
+
+/**
+ * Get actor email.
+ * @method getActorEmail
+ */
+SwagMapModel.prototype.getActorEmail = function() {
+    return this.actorEmail;
+}
+
+/**
  * This function will look at its parameter and determine if it is a
  * local file or a url. It will then make the appropriate request
- * to load the specified resource.
+ * to load the specified resource. The pathOrURL parameter is optional,
+ * if it is not set, the url previously set with setMapUrl will be used.
  * @method load
  * @param {Object} pathOrURL The local path or remove url to load.
  */
 SwagMapModel.prototype.load = function(pathOrURL) {
-    var parsedPathOrURL = url.parse(pathOrURL);
+    if (pathOrURL)
+        this.mapUrl = pathOrURL;
+
+    var parsedPathOrURL = url.parse(this.mapUrl);
     if (typeof window !== "undefined" || parsedPathOrURL.protocol) {
-        this.loadUrl(pathOrURL)
+        this.loadUrl(this.mapUrl)
     } else {
-        this.loadFile(pathOrURL)
+        this.loadFile(this.mapUrl)
     }
 }
 
 /**
  * This function loads a local JSON file and stores the list of items.
  * @method loadFile
+ * @private
  */
 SwagMapModel.prototype.loadFile = function(jsonPath) {
     fs.readFile(jsonPath, function(err, data) {
@@ -56,6 +116,7 @@ SwagMapModel.prototype.loadFile = function(jsonPath) {
 /**
  * This function loads a local JSON file and stores the list of items.
  * @method loadUrl
+ * @private
  */
 SwagMapModel.prototype.loadUrl = function(jsonUrl) {
 
@@ -104,25 +165,20 @@ SwagMapModel.prototype.parseSwagMapDefinition = function(data) {
 }
 
 /**
- * This function gets data items from swagItemModels
- * @method getItemDatas
- */
-SwagMapModel.prototype.getItemDatas = function() {
-    var itemDatas = [];
-    for (var i = 0; i < this.swagItemModels.length; i++) {
-        var x = this.swagItemModels[i].x;
-        var y = this.swagItemModels[i].y;
-        itemDatas.push(this.swagItemModels[i].getSwagItemData(x, y));
-    }
-    return itemDatas;
-}
-
-/**
  * This function gets swag item models
  * @method getSwagItemModels
  */
 SwagMapModel.prototype.getSwagItemModels = function() {
     return this.swagItemModels;
+}
+
+/**
+ * Update completion for all swag item models.
+ * @method updateCompletion
+ */
+SwagMapModel.prototype.updateCompletion = function() {
+    for (var i = 0; i < this.swagItemModels.length; i++)
+        this.swagItemModels[i].updateCompletion();
 }
 
 module.exports = SwagMapModel;

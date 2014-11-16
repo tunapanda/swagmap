@@ -14,8 +14,20 @@ function SwagMapView() {
  * Add a swag item to be displayed.
  * @method addSwagItem
  */
-SwagMapView.prototype.addSwagItem = function(swagItemData) {
-	this.swagItemViews.push(new SwagItemView(swagItemData));
+SwagMapView.prototype.addSwagItem = function() {
+	var swagItemView = new SwagItemView();
+
+	this.swagItemViews.push(swagItemView);
+
+	return swagItemView;
+}
+
+/**
+ * Remove all swag items.
+ * @method removeAllSwagItems
+ */
+SwagMapView.prototype.removeAllSwagItems = function() {
+	this.swagItemViews = [];
 }
 
 /**

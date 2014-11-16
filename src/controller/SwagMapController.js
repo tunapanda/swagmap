@@ -1,3 +1,5 @@
+var SwagItemController = require("./SwagItemController");
+
 /**
  * Manage the connection between the model and the view.
  * @class SwagMapController
@@ -5,6 +7,8 @@
 function SwagMapController(model, view) {
 	this.swagMapModel = model;
 	this.swagMapView = view;
+
+	this.swagItemControllers = [];
 
 	this.swagMapModel.on("loaded", this.onSwagMapModelLoaded, this);
 }
@@ -14,13 +18,18 @@ function SwagMapController(model, view) {
  * @method onSwagMapModelLoaded
  */
 SwagMapController.prototype.onSwagMapModelLoaded = function() {
+	this.swagMapView.removeAllSwagItems();
+	this.swagItemControllers = [];
+
 	var i;
-	var datas = this.swagMapModel.getItemDatas();
+	var swagItemModels = this.swagMapModel.getSwagItemModels();
 
-	console.log("model loaded, data length: " + datas.length);
+	console.log("model loaded, length: " + swagItemModels.length);
 
-	for (i = 0; i < datas.length; i++) {
-		this.swagMapView.addSwagItem(datas[i]);
+	for (i = 0; i < swagItemModels.length; i++) {
+		var swagItemView = this.swagMapView.addSwagItem();
+		var swagItemController = new SwagItemController(swagItemModels[i], swagItemView);
+		this.swagItemControllers.push(swagItemController);
 	}
 }
 

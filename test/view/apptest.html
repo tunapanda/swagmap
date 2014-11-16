@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script language="javascript" src="p5.js"></script>
+		<script language="javascript" src="swagmap.bundle.js"></script>
+		<style> 
+			body {
+				padding: 0; 
+				margin: 0;
+				overflow: hidden;
+			}
+		</style>
+
+		<script>
+			var xApiParams={
+				endpoint: "http://staging.tunapanda.org/learninglocker/public/data/xAPI/",
+				username: "9088f1e9f7c149e72fc76553d5c3c12cfaa5c22c",
+				password: "74b2a7150e840ff9f2b7c4fd2617edaa1f6ab770"
+			};
+
+			var app=new SwagMap();
+			app.setXApiStore(xApiParams);
+			app.setActorEmail("li.mikael@gmail.com");
+			app.setMapUrl("testmap.json");
+			app.run();
+		</script>
+	</head>
+	<body>
+	</body>	
+</html>

@@ -1,7 +1,16 @@
 var EventDispatcher = require("yaed");
-var SwagItemData = require("../data/SwagItemData");
 var inherits = require("inherits");
-var Tincan = require("tincanjs");
+
+// This is something quite ugly, it's a hack workaround...
+// The Node version of Tincan doesn't work without it...
+if (!process.versions) {
+	process.versions = {
+		node: "not_node"
+	}
+}
+
+var TinCan = require("tincanjs");
+
 /**
  * This is resposible for creating an item model using jsondata
  * @class SwagItemModel
@@ -16,12 +25,27 @@ function SwagItemModel(jsondata) {
 inherits(SwagItemModel, EventDispatcher);
 
 /**
- *  This gets the swagItemData from the jsondata
- *  @method getSwagItemData
+ * Get x coordinate where this should be rendered.
+ * @method getX
  */
-SwagItemModel.prototype.getSwagItemData = function() {
-	var swagItemData = new SwagItemData(this.x, this.y, this.object, this.completed);
-	return swagItemData;
+SwagItemModel.prototype.getX = function() {
+	return this.x;
+}
+
+/**
+ * Get y coordinate where this should be rendered.
+ * @method getY
+ */
+SwagItemModel.prototype.getY = function() {
+	return this.y;
+}
+
+/**
+ * Is this item completed?
+ * @method isComplete
+ */
+SwagItemModel.prototype.isComplete = function() {
+	return this.completed;
 }
 
 /**
@@ -49,28 +73,28 @@ SwagItemModel.prototype.setSwagMapModel = function(swagMapModel) {
 }
 
 /**
-*  Update the completion of an activity 
-*  @method updateCompletion
-*/
-SwagItemModel.prototype.updateCompletion = function(){
+ *  Update the completion of an activity
+ *  @method updateCompletion
+ */
+SwagItemModel.prototype.updateCompletion = function() {
 	var tincan = this.swagMapModel.getTinCan();
 	var statements = [];
 	tincan.getStatements({
 		params: {
-			"agent": new Tincan.Agent({
-				"mbox":"mailto:hello@example.com"
+			"agent": new TinCan.Agent({
+				"mbox": "mailto:" + this.swagMapModel.getActorEmail()
 			}),
-			"activity": new Tincan.Activity({
-				"id": "http://example.com/activity"
+			"activity": new TinCan.Activity({
+				"id": this.object
 			})
 		},
-		callback: function(err, result){
-			for (var i = 0; i < result.statements.length; i++){
+		callback: function(err, result) {
+			for (var i = 0; i < result.statements.length; i++) {
 				statements[i] = result.statements[i];
 			}
 		}
 	});
-	for (var i = 0; i < statements.length; i++){
+	for (var i = 0; i < statements.length; i++) {
 		this.handleXApiStatement(statements[i]);
 	}
 	this.trigger("update");

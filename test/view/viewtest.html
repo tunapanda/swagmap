@@ -15,11 +15,15 @@
 			var view=new swagmap.SwagMapView();
 			view.install();
 
-			var item1=new swagmap.SwagItemData(50,100);
-			var item2=new swagmap.SwagItemData(200,150);
+			var item1=view.addSwagItem();
+			item1.setX(50);
+			item1.setY(100);
 
-			view.addSwagItem(item1);
-			view.addSwagItem(item2);
+			var item2=view.addSwagItem();
+			item2.setX(200);
+			item2.setY(120);
+			item2.setComplete(true);
+
 			view.addConnection(item1, item2);
 		</script>
 	</head>
