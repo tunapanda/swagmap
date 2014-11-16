@@ -5,6 +5,7 @@
 function SwagItemView(swagItemData) {
 	this.x = 0;
 	this.y = 0;
+	this.label = "";
 	this.complete = false;
 }
 
@@ -24,6 +25,13 @@ SwagItemView.prototype.setY = function(value) {
 	this.y = value;
 }
 
+/**
+*  Set the label of swag item
+*  @method setLabel
+*/
+SwagItemView.prototype.setLabel = function(value){
+	this.label = value;
+}
 /**
  * Set complete.
  * @method setComplete

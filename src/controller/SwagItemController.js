@@ -16,6 +16,7 @@ function SwagItemController(model, view) {
 SwagItemController.prototype.update = function() {
 	this.swagItemView.setX(this.swagItemModel.getX());
 	this.swagItemView.setY(this.swagItemModel.getY());
+	this.swagItemView.setLabel(this.swagItemModel.getLabel());
 	this.swagItemView.setComplete(this.swagItemModel.isComplete());
 }
 

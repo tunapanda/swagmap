@@ -18,6 +18,7 @@ var TinCan = require("tincanjs");
 function SwagItemModel(jsondata) {
 	this.x = jsondata.x;
 	this.y = jsondata.y;
+	this.label = jsondata.label;
 	this.object = jsondata.object;
 	this.completed = false;
 	this.swagMapModel = null;
@@ -40,6 +41,13 @@ SwagItemModel.prototype.getY = function() {
 	return this.y;
 }
 
+/**
+*  Get the label for a swag item
+*  @method getLabel
+*/
+SwagItemModel.prototype.getLabel = function(){
+	return this.label;
+}
 /**
  * Is this item completed?
  * @method isComplete

@@ -89,7 +89,7 @@ describe("SwagItemModel", function() {
 			o.callback(null, {
 				statements: [{
 					"actor": {
-						"mbox": "test@example.com"
+						"mbox": "hello@example.com"
 					},
 					"verb": {
 						"id": "http://adlnet.gov/expapi/verbs/completed/"
@@ -123,10 +123,6 @@ describe("SwagItemModel", function() {
 		swagItemModel.updateCompletion();
 
 		expect(updateSpy).toHaveBeenCalled();
-<<<<<<< HEAD
-		expect(swagItemModel.getSwagItemData().isComplete()).toBe(true);
-=======
 		expect(swagItemModel.isComplete()).toBe(true);
->>>>>>> bd6841d688f741d9fccab3bc8f682226fae2089e
 	});
 });
