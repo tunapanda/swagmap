@@ -77,7 +77,7 @@ describe("SwagItemModel", function() {
 		expect(swagItemModel.isComplete()).toBe(false);
 	});
 
-	/*it("can update completion by calling xAPI", function() {
+	it("can update completion by calling xAPI", function() {
 		var mockTinCan = {};
 		mockTinCan.getStatements = function(o) {
 			expect(o.params.agent).toEqual(jasmine.any(TinCan.Agent));
@@ -124,5 +124,5 @@ describe("SwagItemModel", function() {
 
 		expect(updateSpy).toHaveBeenCalled();
 		expect(swagItemModel.isComplete()).toBe(true);
-	});*/
+	});
 });

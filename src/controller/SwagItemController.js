@@ -1,5 +1,5 @@
 /**
- * Manage the connection between the model and the view.
+ * Manage the connection between the model and the view for on e swag item.
  * @class SwagMapController
  */
 function SwagItemController(model, view) {

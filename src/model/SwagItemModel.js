@@ -1,6 +1,15 @@
 var EventDispatcher = require("yaed");
 var inherits = require("inherits");
-//var Tincan = require("tincanjs");
+
+// This is something quite ugly, it's a hack workaround...
+// The Node version of Tincan doesn't work without it...
+if (!process.versions) {
+	process.versions = {
+		node: "not_node"
+	}
+}
+
+var TinCan = require("tincanjs");
 
 /**
  * This is resposible for creating an item model using jsondata
@@ -67,15 +76,15 @@ SwagItemModel.prototype.setSwagMapModel = function(swagMapModel) {
  *  Update the completion of an activity
  *  @method updateCompletion
  */
-/*SwagItemModel.prototype.updateCompletion = function() {
+SwagItemModel.prototype.updateCompletion = function() {
 	var tincan = this.swagMapModel.getTinCan();
 	var statements = [];
 	tincan.getStatements({
 		params: {
-			"agent": new Tincan.Agent({
+			"agent": new TinCan.Agent({
 				"mbox": "mailto:" + this.swagMapModel.getActorEmail()
 			}),
-			"activity": new Tincan.Activity({
+			"activity": new TinCan.Activity({
 				"id": this.object
 			})
 		},
@@ -89,6 +98,6 @@ SwagItemModel.prototype.setSwagMapModel = function(swagMapModel) {
 		this.handleXApiStatement(statements[i]);
 	}
 	this.trigger("update");
-}*/
+}
 
 module.exports = SwagItemModel;
