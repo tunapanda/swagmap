@@ -50,8 +50,8 @@ SwagItemView.prototype.draw = function() {
 	} else {
 		fill(255, 255, 255);
 	}
-
 	ellipse(this.x, this.y, 50, 50);
+	text(this.label, this.x, this.y + 60);
 }
 
 module.exports = SwagItemView;
