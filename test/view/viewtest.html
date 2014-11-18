@@ -22,11 +22,24 @@
 
 			var item2=view.addSwagItem();
 			item2.setX(200);
-			item2.setY(120);
+			item2.setY(250);
 			item2.setComplete(true);
 			item2.setLabel("Level2");
 
-			view.addConnection(item1, item2);
+			var item3=view.addSwagItem();
+			item3.setX(400);
+			item3.setY(150);
+			item3.setLabel("Level3");
+
+			// Level2 connects to Level3
+			/*var c=item2.createConnection();
+			c.setToX(400);
+			c.setToY(150);*/
+
+			// Also make Level2 connect to Level1
+			/*var c=item2.createConnection();
+			c.setToX(50);
+			c.setToY(100);*/
 		</script>
 	</head>
 	<body>
