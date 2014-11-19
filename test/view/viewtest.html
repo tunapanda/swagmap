@@ -32,14 +32,18 @@
 			item3.setLabel("Level3");
 
 			// Level2 connects to Level3
-			/*var c=item2.createConnection();
+			var c=item2.createConnection();
 			c.setToX(400);
-			c.setToY(150);*/
+			c.setToY(150);
+			view.addConnection(c);
+
+			console.log();
 
 			// Also make Level2 connect to Level1
-			/*var c=item2.createConnection();
-			c.setToX(50);
-			c.setToY(100);*/
+			var c2=item2.createConnection();
+			c2.setToX(50);
+			c2.setToY(100);
+			view.addConnection(c2);
 		</script>
 	</head>
 	<body>

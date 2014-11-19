@@ -1,3 +1,4 @@
+var SwagConnectionView = require("./SwagConnectionView");
 /**
  * Manages the display of one swag item.
  * @class SwagItemView
@@ -7,6 +8,8 @@ function SwagItemView(swagItemData) {
 	this.y = 0;
 	this.label = "";
 	this.complete = false;
+	this.connectsTo = {x: 0, y: 0};
+	this.connectsFrom = {x: 0, y: 0};
 }
 
 /**
@@ -41,6 +44,17 @@ SwagItemView.prototype.setComplete = function(value) {
 }
 
 /**
+* Create a connection between two swag items
+* @method createConnection
+*/
+SwagItemView.prototype.createConnection = function(){
+	var connection = new SwagConnectionView();
+	connection.setFromX(this.x);
+	connection.setFromY(this.y);
+	return connection;
+	
+}
+/**
  * Draw the swag item.
  * @method draw
  */
@@ -52,6 +66,7 @@ SwagItemView.prototype.draw = function() {
 	}
 	ellipse(this.x, this.y, 50, 50);
 	text(this.label, this.x, this.y + 60);
+
 }
 
 module.exports = SwagItemView;
