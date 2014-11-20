@@ -1,33 +1,49 @@
 /**
-*  Resposible for the display of a connction between two swagfacts
-*  @class SwagConnectionView
-*/
-
-function SwagConnectionView(){
-    this.connection = [];
+ *  Resposible for the display of a connction between two swagfacts
+ *  @class SwagConnectionView
+ */
+function SwagConnectionView() {
+	this.connection = [];
 }
 
 /**
-*  Draw a connection between two items
-*  @method draw
-*/
-SwagConnectionView.prototype.setFromX = function(value){
+ * Set from x.
+ * @method setFromX
+ */
+SwagConnectionView.prototype.setFromX = function(value) {
 	this.connection.push(value);
 }
 
-SwagConnectionView.prototype.setFromY = function(value){
+/**
+ * Set from y.
+ * @method setFromY
+ */
+SwagConnectionView.prototype.setFromY = function(value) {
 	this.connection.push(value);
 }
 
-SwagConnectionView.prototype.setToX = function(value){
+/**
+ * Set to x.
+ * @method setToX
+ */
+SwagConnectionView.prototype.setToX = function(value) {
 	this.connection.push(value);
 }
 
-SwagConnectionView.prototype.setToY = function(value){
+/**
+ * Set to y.
+ * @method setToY
+ */
+SwagConnectionView.prototype.setToY = function(value) {
 	this.connection.push(value);
 }
-SwagConnectionView.prototype.draw = function(){
-    line(this.connection[0], this.connection[1], this.connection[2], this.connection[3]);
-}
-module.exports=SwagConnectionView;
 
+/**
+ * Draw the connection.
+ * @method draw
+ */
+SwagConnectionView.prototype.draw = function() {
+	line(this.connection[0], this.connection[1], this.connection[2], this.connection[3]);
+}
+
+module.exports = SwagConnectionView;
