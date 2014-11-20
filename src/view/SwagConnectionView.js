@@ -4,6 +4,11 @@
  */
 function SwagConnectionView() {
 	this.connection = [];
+
+	this.fromX = 0;
+	this.fromY = 0;
+	this.toX = 0;
+	this.toY = 0;
 }
 
 /**
@@ -11,7 +16,7 @@ function SwagConnectionView() {
  * @method setFromX
  */
 SwagConnectionView.prototype.setFromX = function(value) {
-	this.connection.push(value);
+	this.fromX = value;
 }
 
 /**
@@ -19,7 +24,7 @@ SwagConnectionView.prototype.setFromX = function(value) {
  * @method setFromY
  */
 SwagConnectionView.prototype.setFromY = function(value) {
-	this.connection.push(value);
+	this.fromY = value;
 }
 
 /**
@@ -27,7 +32,7 @@ SwagConnectionView.prototype.setFromY = function(value) {
  * @method setToX
  */
 SwagConnectionView.prototype.setToX = function(value) {
-	this.connection.push(value);
+	this.toX = value;
 }
 
 /**
@@ -35,15 +40,43 @@ SwagConnectionView.prototype.setToX = function(value) {
  * @method setToY
  */
 SwagConnectionView.prototype.setToY = function(value) {
-	this.connection.push(value);
+	this.toY = value;
 }
+
 
 /**
  * Draw the connection.
  * @method draw
  */
 SwagConnectionView.prototype.draw = function() {
-	line(this.connection[0], this.connection[1], this.connection[2], this.connection[3]);
+	var dx = this.toX - this.fromX;
+	var dy = this.toY - this.fromY;
+	var l = Math.sqrt(dx * dx + dy * dy);
+
+	if (l > 0) {
+		dx /= l;
+		dy /= l;
+	}
+
+	line(this.fromX + dx * 40, this.fromY + dy * 40, this.toX - dx * 40, this.toY - dy * 40);
+
+	var angle = Math.atan2(dy, dx);
+
+	//console.log("pi: "+Math.PI);
+
+	line(
+		this.toX - dx * 40,
+		this.toY - dy * 40,
+		this.toX - dx * 40 + 10 * Math.cos(angle + Math.PI+.5),
+		this.toY - dy * 40 + 10 * Math.sin(angle + Math.PI+.5)
+	);
+
+	line(
+		this.toX - dx * 40,
+		this.toY - dy * 40,
+		this.toX - dx * 40 + 10 * Math.cos(angle + Math.PI-.5),
+		this.toY - dy * 40 + 10 * Math.sin(angle + Math.PI-.5)
+	);
 }
 
 module.exports = SwagConnectionView;
