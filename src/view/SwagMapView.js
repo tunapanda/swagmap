@@ -14,7 +14,7 @@ function SwagMapView() {
  * Add a swag item to be displayed.
  * @method addSwagItem
  */
-SwagMapView.prototype.addSwagItem = function() {
+SwagMapView.prototype.createSwagItem = function() {
 	var swagItemView = new SwagItemView();
 
 	this.swagItemViews.push(swagItemView);

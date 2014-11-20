@@ -1,15 +1,14 @@
 var SwagConnectionView = require("./SwagConnectionView");
+
 /**
  * Manages the display of one swag item.
  * @class SwagItemView
  */
-function SwagItemView(swagItemData) {
+function SwagItemView() {
 	this.x = 0;
 	this.y = 0;
 	this.label = "";
 	this.complete = false;
-	this.connectsTo = {x: 0, y: 0};
-	this.connectsFrom = {x: 0, y: 0};
 }
 
 /**

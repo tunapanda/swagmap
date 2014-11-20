@@ -27,7 +27,7 @@ SwagMapController.prototype.onSwagMapModelLoaded = function() {
 	console.log("model loaded, length: " + swagItemModels.length);
 
 	for (i = 0; i < swagItemModels.length; i++) {
-		var swagItemView = this.swagMapView.addSwagItem();
+		var swagItemView = this.swagMapView.createSwagItem();
 		var swagItemController = new SwagItemController(swagItemModels[i], swagItemView);
 		this.swagItemControllers.push(swagItemController);
 	}
