@@ -9,6 +9,8 @@ function SwagItemView() {
 	this.y = 0;
 	this.label = "";
 	this.complete = false;
+
+	this.swagConnections = [];
 }
 
 /**
@@ -28,10 +30,10 @@ SwagItemView.prototype.setY = function(value) {
 }
 
 /**
-*  Set the label of swag item
-*  @method setLabel
-*/
-SwagItemView.prototype.setLabel = function(value){
+ *  Set the label of swag item
+ *  @method setLabel
+ */
+SwagItemView.prototype.setLabel = function(value) {
 	this.label = value;
 }
 /**
@@ -43,29 +45,34 @@ SwagItemView.prototype.setComplete = function(value) {
 }
 
 /**
-* Create a connection between two swag items
-* @method createConnection
-*/
-SwagItemView.prototype.createConnection = function(){
+ * Create a connection between two swag items
+ * @method createConnection
+ */
+SwagItemView.prototype.createConnection = function() {
 	var connection = new SwagConnectionView();
 	connection.setFromX(this.x);
 	connection.setFromY(this.y);
+
+	this.swagConnections.push(connection);
+
 	return connection;
-	
 }
+
 /**
  * Draw the swag item.
  * @method draw
  */
 SwagItemView.prototype.draw = function() {
+	for (var i = 0; i < this.swagConnections.length; i++)
+		this.swagConnections[i].draw();
+
 	if (this.complete) {
 		fill(255, 0, 0);
 	} else {
 		fill(255, 255, 255);
 	}
 	ellipse(this.x, this.y, 50, 50);
-	text(this.label, this.x, this.y + 60);
-
+	text(this.label, this.x - textWidth(this.label)/2, this.y + 60);
 }
 
 module.exports = SwagItemView;

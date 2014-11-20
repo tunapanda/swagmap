@@ -7,7 +7,6 @@ var SwagConnectionView = require("./SwagConnectionView");
  */
 function SwagMapView() {
 	this.swagItemViews = [];
-	this.swagConnections = [];
 }
 
 /**
@@ -28,15 +27,6 @@ SwagMapView.prototype.createSwagItem = function() {
  */
 SwagMapView.prototype.removeAllSwagItems = function() {
 	this.swagItemViews = [];
-}
-
-/**
- *  creates a connection between two Swag items
- *  @method addConnection
- */
-SwagMapView.prototype.addConnection = function(connection) {
-	this.swagConnections.push(connection);
-	console.log()
 }
 
 /**
@@ -62,9 +52,6 @@ SwagMapView.prototype.draw = function() {
 
 	for (var i = 0; i < this.swagItemViews.length; i++)
 		this.swagItemViews[i].draw();
-
-	for (var i = 0; i < this.swagConnections.length; i++)
-		this.swagConnections[i].draw();
 }
 
 /**
