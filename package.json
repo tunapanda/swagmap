@@ -20,7 +20,7 @@
     "request": "2.40.0",
     "tincanjs": "^0.31.0",
     "yaed": "^1.0.0",
-    "yuidocjs": "git+https://github.com/limikael/yuidoc.git",
-    "yuidoc-die-on-warnings": "0.0.1"
+    "yuidoc-die-on-warnings": "0.0.1",
+    "yuidocjs": "^0.4.0"
   }
 }

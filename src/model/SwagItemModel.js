@@ -22,6 +22,9 @@ function SwagItemModel(jsondata) {
 	this.object = jsondata.object;
 	this.completed = false;
 	this.swagMapModel = null;
+
+	if (jsondata.verb)
+		this.verb = jsondata.verb;
 }
 inherits(SwagItemModel, EventDispatcher);
 
@@ -42,12 +45,13 @@ SwagItemModel.prototype.getY = function() {
 }
 
 /**
-*  Get the label for a swag item
-*  @method getLabel
-*/
-SwagItemModel.prototype.getLabel = function(){
+ *  Get the label for a swag item
+ *  @method getLabel
+ */
+SwagItemModel.prototype.getLabel = function() {
 	return this.label;
 }
+
 /**
  * Is this item completed?
  * @method isComplete
@@ -65,10 +69,16 @@ SwagItemModel.prototype.handleXApiStatement = function(xApiStament) {
 	var actor = xApiStament["actor"];
 	var verb = xApiStament["verb"];
 	var object = xApiStament["object"];
-	if (object['id'] === this.object) {
-		if (verb['id'].search("completed") >= 0) {
+
+	if (object["id"] != this.object)
+		return;
+
+	if (this.verb) {
+		if (this.verb == verb["id"]) {
 			this.completed = true;
 		}
+	} else if (verb['id'].search("completed") >= 0) {
+		this.completed = true;
 	}
 }
 

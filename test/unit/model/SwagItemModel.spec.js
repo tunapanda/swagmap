@@ -18,7 +18,8 @@ describe("SwagItemModel", function() {
 		var jsonData = {
 			x: 20,
 			y: 21,
-			object: "http://example.com/activity"
+			object: "http://example.com/activity",
+			verb: "http://adlnet.gov/expapi/verbs/completed_test"
 		};
 		var swagItemModel = new SwagItemModel(jsonData);
 		// At first, it should not be complete.
@@ -44,7 +45,7 @@ describe("SwagItemModel", function() {
 				"mbox": "test@example.com"
 			},
 			"verb": {
-				"id": "http://adlnet.gov/expapi/verbs/completed/"
+				"id": "http://adlnet.gov/expapi/verbs/completed_test"
 			},
 			"object": {
 				"id": "http://example.com/activity"
