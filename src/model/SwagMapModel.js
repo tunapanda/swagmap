@@ -25,6 +25,7 @@ function SwagMapModel() {
     this.mapUrl = null;
     this.actorEmail = null;
     this.tinCan = null;
+    this.loadingMap = false;
 }
 
 inherits(SwagMapModel, EventDispatcher);
@@ -102,6 +103,12 @@ SwagMapModel.prototype.load = function(pathOrURL) {
  * @private
  */
 SwagMapModel.prototype.loadFile = function(jsonPath) {
+    if (this.isLoading())
+        throw new Error("Can't load, loading already in progress...");
+
+    this.loadingMap = true;
+    this.trigger("loadingStateChange");
+
     fs.readFile(jsonPath, function(err, data) {
         if (err) {
             console.log("Error" + err);
@@ -109,6 +116,8 @@ SwagMapModel.prototype.loadFile = function(jsonPath) {
         }
 
         this.parseSwagMapDefinition(data.toString());
+        this.loadingMap = false;
+        this.trigger("loadingStateChange");
         this.trigger("loaded");
     }.bind(this));
 }
@@ -119,6 +128,11 @@ SwagMapModel.prototype.loadFile = function(jsonPath) {
  * @private
  */
 SwagMapModel.prototype.loadUrl = function(jsonUrl) {
+    if (this.isLoading())
+        throw new Error("Can't load, loading already in progress...");
+
+    this.loadingMap = true;
+    this.trigger("loadingStateChange");
 
     // If this is not a proper full url, we need to append the url
     // path from the window location.
@@ -141,6 +155,8 @@ SwagMapModel.prototype.loadUrl = function(jsonUrl) {
             this.parseSwagMapDefinition(body.toString());
         }
 
+        this.loadingMap = false;
+        this.trigger("loadingStateChange");
         this.trigger("loaded");
     }.bind(this));
 }
@@ -177,8 +193,28 @@ SwagMapModel.prototype.getSwagItemModels = function() {
  * @method updateCompletion
  */
 SwagMapModel.prototype.updateCompletion = function() {
+    if (this.isLoading())
+        throw new Error("Can't update completion, loading already in progress...");
+
     for (var i = 0; i < this.swagItemModels.length; i++)
         this.swagItemModels[i].updateCompletion();
+
+    this.trigger("loadingStateChange");
+}
+
+/**
+ * Are we loading somethinf currently?
+ * @method isLoading
+ */
+SwagMapModel.prototype.isLoading = function() {
+    if (this.loadingMap)
+        return true;
+
+    for (var i = 0; i < this.swagItemModels.length; i++)
+        if (this.swagItemModels[i].isLoading())
+            return true;
+
+    return false;
 }
 
 module.exports = SwagMapModel;

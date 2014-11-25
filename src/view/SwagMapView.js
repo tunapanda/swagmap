@@ -7,6 +7,15 @@ var SwagConnectionView = require("./SwagConnectionView");
  */
 function SwagMapView() {
 	this.swagItemViews = [];
+	this.showLoading = false;
+}
+
+/**
+ * Should we show a loading screen?
+ * @method setShowLoading
+ */
+SwagMapView.prototype.setShowLoading = function(value) {
+	this.showLoading = value;
 }
 
 /**
@@ -43,6 +52,16 @@ SwagMapView.prototype.setup = function() {
  */
 SwagMapView.prototype.draw = function() {
 	background(0, 0, 0);
+
+	if (this.showLoading) {
+		textSize(12);
+		stroke(255, 255, 255);
+
+		var w = textWidth("Loading...");
+
+		text("Loading...", windowWidth / 2 - w / 2, windowHeight / 2 - 5);
+		return;
+	}
 
 	textSize(32);
 	text("Tunapanda Swag", 15, 35);

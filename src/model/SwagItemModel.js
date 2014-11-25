@@ -25,6 +25,8 @@ function SwagItemModel(jsondata) {
 
 	if (jsondata.verb)
 		this.verb = jsondata.verb;
+
+	this.loadingCompletion = false;
 }
 inherits(SwagItemModel, EventDispatcher);
 
@@ -98,6 +100,7 @@ SwagItemModel.prototype.updateCompletion = function() {
 	var tincan = this.swagMapModel.getTinCan();
 	var statements = [];
 	var scope = this;
+	this.loadingCompletion = true;
 
 	tincan.getStatements({
 		params: {
@@ -112,12 +115,13 @@ SwagItemModel.prototype.updateCompletion = function() {
 			for (var i = 0; i < result.statements.length; i++) {
 				statements[i] = result.statements[i];
 			}
+			for (var i = 0; i < statements.length; i++) {
+				scope.handleXApiStatement(statements[i]);
+			}
+			this.loadingCompletion = false;
 			scope.trigger("update");
 		}
 	});
-	for (var i = 0; i < statements.length; i++) {
-		this.handleXApiStatement(statements[i]);
-	}
 }
 
 module.exports = SwagItemModel;
