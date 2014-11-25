@@ -97,6 +97,8 @@ SwagItemModel.prototype.setSwagMapModel = function(swagMapModel) {
 SwagItemModel.prototype.updateCompletion = function() {
 	var tincan = this.swagMapModel.getTinCan();
 	var statements = [];
+	var scope = this;
+
 	tincan.getStatements({
 		params: {
 			"agent": new TinCan.Agent({
@@ -110,12 +112,12 @@ SwagItemModel.prototype.updateCompletion = function() {
 			for (var i = 0; i < result.statements.length; i++) {
 				statements[i] = result.statements[i];
 			}
+			scope.trigger("update");
 		}
 	});
 	for (var i = 0; i < statements.length; i++) {
 		this.handleXApiStatement(statements[i]);
 	}
-	this.trigger("update");
 }
 
 module.exports = SwagItemModel;
