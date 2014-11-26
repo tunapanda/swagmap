@@ -1,6 +1,2 @@
 RewriteEngine On
-RewriteBase /swagmapdemo/xapiproxy/
-RewriteCond %{REQUEST_FILENAME}  !-l
-RewriteCond %{REQUEST_FILENAME}  !-d
-RewriteCond %{REQUEST_FILENAME}  !-f
-RewriteRule .* index.php?%{QUERY_STRING} [L]
+RewriteRule .* index.php?%{QUERY_STRING} [E=REWRITEBASE:/swagmapdemo/xapiproxy/]
