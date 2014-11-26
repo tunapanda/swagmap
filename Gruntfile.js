@@ -32,6 +32,39 @@ module.exports = function(grunt) {
 		]);
 	});
 
+	grunt.registerTask("release", function() {
+		var done = this.async();
+
+		async.series([
+			function(next) {
+				if (!fs.existsSync("bin"))
+					fs.mkdirSync("bin");
+
+				next();
+			},
+
+			function(next) {
+				var job = new qsub("./node_modules/.bin/browserify");
+				job.arg("-o", "bin/swagmap.bundle.js", "src/swagmap.js");
+				job.show().expect(0);
+
+				job.run().then(next, grunt.fail.fatal);
+			},
+
+			function(next) {
+				var job = new qsub("./node_modules/.bin/uglifyjs");
+				job.arg("-o", "bin/swagmap.min.js", "bin/swagmap.bundle.js");
+				job.show().expect(0);
+
+				job.run().then(next, grunt.fail.fatal);
+			},
+
+			function() {
+				done();
+			}
+		]);
+	});
+
 	grunt.registerTask("browserify", function() {
 		var done = this.async();
 
@@ -131,7 +164,7 @@ module.exports = function(grunt) {
 					wrench.rmdirSyncRecursive("demo");
 
 				wrench.copyDirSyncRecursive("test/view", "demo");
-				fse.copySync("demo/xapiproxy/.htaccess.altervista","demo/xapiproxy/.htaccess");
+				fse.copySync("demo/xapiproxy/.htaccess.altervista", "demo/xapiproxy/.htaccess");
 
 				next();
 			},
@@ -186,6 +219,7 @@ module.exports = function(grunt) {
 		console.log("  publish-doc   - Upload internal class docs to: http://limikael.altervista.org/swagmapdoc");
 		console.log("  publish-demo  - Upload demo to: http://limikael.altervista.org/swagmapdemo");
 		console.log("  test          - Run tests on model.");
-		console.log("  browserify    - Compile javascript bundle.");
+		console.log("  browserify    - Compile javascript bundle for local testing.");
+		console.log("  release       - Compile javascript bundle for release.");
 	});
 };
