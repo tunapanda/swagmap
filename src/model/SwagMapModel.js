@@ -109,16 +109,18 @@ SwagMapModel.prototype.loadFile = function(jsonPath) {
     this.loadingMap = true;
     this.trigger("loadingStateChange");
 
+    var scope = this;
+
     fs.readFile(jsonPath, function(err, data) {
         if (err) {
             console.log("Error" + err);
             return;
         }
 
-        this.parseSwagMapDefinition(data.toString());
-        this.loadingMap = false;
-        this.trigger("loadingStateChange");
-        this.trigger("loaded");
+        scope.parseSwagMapDefinition(data.toString());
+        scope.loadingMap = false;
+        scope.trigger("loadingStateChange");
+        scope.trigger("loaded");
     }.bind(this));
 }
 
@@ -143,21 +145,23 @@ SwagMapModel.prototype.loadUrl = function(jsonUrl) {
         jsonUrl = path + jsonUrl;
     }
 
-    console.log("loading: " + jsonUrl);
+    console.log("loading swagmap: " + jsonUrl);
+
+    var scope = this;
 
     var options = {
         url: jsonUrl,
     };
     request(options, function(error, response, body) {
-        console.log("loaded, error: " + error); //response.statusCode);
+        console.log("loaded... error: " + error); //response.statusCode);
 
         if (!error && response.statusCode == 200) {
             this.parseSwagMapDefinition(body.toString());
         }
 
-        this.loadingMap = false;
-        this.trigger("loadingStateChange");
-        this.trigger("loaded");
+        scope.loadingMap = false;
+        scope.trigger("loadingStateChange");
+        scope.trigger("loaded");
     }.bind(this));
 }
 
@@ -176,8 +180,17 @@ SwagMapModel.prototype.parseSwagMapDefinition = function(data) {
     for (var i = 0; i < data.items.length; i++) {
         var swagItemModel = new SwagItemModel(data.items[i]);
         swagItemModel.setSwagMapModel(this);
+        swagItemModel.on("update", this.onSwagItemUpdate.bind(this));
         this.swagItemModels.push(swagItemModel);
     }
+}
+
+/**
+ * One of our swag items were updated.
+ * @method onSwagItemUpdate
+ */
+SwagMapModel.prototype.onSwagItemUpdate = function() {
+    this.trigger("loadingStateChange");
 }
 
 /**

@@ -11,7 +11,7 @@ function SwagMapController(model, view) {
 	this.swagItemControllers = [];
 
 	this.swagMapModel.on("loaded", this.onSwagMapModelLoaded, this);
-	this.swagMapModel.on("loadingStateChanged", this.onSwagMapLoadingStateChanged, this);
+	this.swagMapModel.on("loadingStateChange", this.onSwagMapLoadingStateChange, this);
 
 	this.updateShowLoading();
 }
@@ -20,7 +20,8 @@ function SwagMapController(model, view) {
  * Loading state changed.
  * @method onSwagMapLoadingStateChanged
  */
-SwagMapController.prototype.onSwagMapLoadingStateChanged = function() {
+SwagMapController.prototype.onSwagMapLoadingStateChange = function() {
+	console.log("loading state change, loading: " + this.swagMapModel.isLoading());
 	this.updateShowLoading();
 }
 

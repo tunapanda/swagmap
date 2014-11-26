@@ -12,8 +12,12 @@
 		</style>
 
 		<script>
+			var path=window.location.href.substring(0,window.location.href.lastIndexOf("/")+1);
+			var endpointPath=path+"xapiproxy";
+			console.log("loading from: "+endpointPath);
+
 			var xApiParams={
-				endpoint: "http://localhost/repo/phpproxy/test/",
+				endpoint: endpointPath,
 				username: "9088f1e9f7c149e72fc76553d5c3c12cfaa5c22c",
 				password: "74b2a7150e840ff9f2b7c4fd2617edaa1f6ab770"
 			};

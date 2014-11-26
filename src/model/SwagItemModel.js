@@ -68,9 +68,22 @@ SwagItemModel.prototype.isComplete = function() {
  * @method handleXApiStatement
  */
 SwagItemModel.prototype.handleXApiStatement = function(xApiStament) {
+	console.log("handling statement...");
+	console.log(xApiStament);
+
 	var actor = xApiStament["actor"];
 	var verb = xApiStament["verb"];
-	var object = xApiStament["object"];
+
+	var object;
+
+	if (xApiStament.object)
+		object = xApiStament.object;
+
+	else if (xApiStament.target)
+		object = xApiStament.target;
+
+	else
+		throw new Error("statement doesn't have a target or object");
 
 	if (object["id"] != this.object)
 		return;
@@ -118,10 +131,18 @@ SwagItemModel.prototype.updateCompletion = function() {
 			for (var i = 0; i < statements.length; i++) {
 				scope.handleXApiStatement(statements[i]);
 			}
-			this.loadingCompletion = false;
+			scope.loadingCompletion = false;
 			scope.trigger("update");
 		}
 	});
+}
+
+/**
+ * Are we loading completion?
+ * @method isLoading
+ */
+SwagItemModel.prototype.isLoading = function() {
+	return this.loadingCompletion;
 }
 
 module.exports = SwagItemModel;
