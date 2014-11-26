@@ -1,2 +1,3 @@
 RewriteEngine On
+RewriteBase /swagmapdemo/xapiproxy/
 RewriteRule .* index.php?%{QUERY_STRING}

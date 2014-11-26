@@ -2,6 +2,7 @@ var qsub = require("qsub");
 var async = require("async");
 var fs = require("fs");
 var fse = require("fs-extra");
+var wrench = require("wrench");
 
 module.exports = function(grunt) {
 	grunt.initConfig({
@@ -120,14 +121,24 @@ module.exports = function(grunt) {
 	grunt.registerTask("publish-demo", function() {
 		var done = this.async();
 
-		if (fs.existsSync("demo.zip"))
-			fs.unlinkSync("demo.zip");
-
 		async.series([
 
 			function(next) {
+				if (fs.existsSync("demo.zip"))
+					fs.unlinkSync("demo.zip");
+
+				if (fs.existsSync("demo"))
+					wrench.rmdirSyncRecursive("demo");
+
+				wrench.copyDirSyncRecursive("test/view", "demo");
+				fse.copySync("demo/xapiproxy/.htaccess.altervista","demo/xapiproxy/.htaccess");
+
+				next();
+			},
+
+			function(next) {
 				var job = qsub("zip");
-				job.arg("-r", "demo.zip", "test/view");
+				job.arg("-r", "demo.zip", "demo");
 				job.expect(0);
 				job.run().then(next, grunt.fail.fatal);
 			},
@@ -159,6 +170,9 @@ module.exports = function(grunt) {
 			function() {
 				if (fs.existsSync("demo.zip"))
 					fs.unlinkSync("demo.zip");
+
+				if (fs.existsSync("demo"))
+					wrench.rmdirSyncRecursive("demo");
 
 				done();
 			}

@@ -53,14 +53,17 @@
 
 			curl_setopt($curl, CURLOPT_URL, $url);
 
-			$inheaders=getallheaders();
 			$headers=array();
 
 			foreach ($this->headers as $header=>$value)
 				$headers[$header]=$value;
 
-			foreach ($this->forwardHeaders as $header=>$value)
-				$headers[$header]=$inheaders[$header];
+			if (sizeof($this->forwardHeaders)) {
+				$inheaders=getallheaders();
+
+				foreach ($this->forwardHeaders as $header=>$value)
+					$headers[$header]=$inheaders[$header];
+			}
 
 			curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
