@@ -37422,6 +37422,12 @@ TinCan client library
       if (this._request) {
         throw new InvalidStateError("send() already called");
       }
+
+      // Default to current protocol for relative URLs
+      if (this._url.protocol === null) {
+        this._url.protocol = window.location.protocol;
+      }
+
       switch (this._url.protocol) {
         case 'file:':
           this._sendFile(data);
