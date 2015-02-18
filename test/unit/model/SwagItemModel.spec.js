@@ -1,5 +1,5 @@
+TinCan = require("tincanjs");
 var SwagItemModel = require("../../../src/model/SwagItemModel");
-var TinCan = require("tincanjs");
 
 describe("SwagItemModel", function() {
 	it("can be created from data", function() {

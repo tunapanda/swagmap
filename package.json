@@ -18,7 +18,7 @@
     "jasmine-node": "^2.0.0-beta4",
     "qsub": "0.0.6",
     "request": "2.40.0",
-    "tincanjs": "^0.31.0",
+    "tincanjs": "^0.32.0",
     "uglify-js": "^2.4.15",
     "wrench": "^1.5.8",
     "yaed": "^1.0.0",

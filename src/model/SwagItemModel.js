@@ -3,13 +3,11 @@ var inherits = require("inherits");
 
 // This is something quite ugly, it's a hack workaround...
 // The Node version of Tincan doesn't work without it...
-if (!process.versions) {
+/*if (!process.versions) {
 	process.versions = {
 		node: "not_node"
 	}
-}
-
-var TinCan = require("tincanjs");
+}*/
 
 /**
  * This is resposible for creating an item model using jsondata

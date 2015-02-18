@@ -67,7 +67,7 @@ SwagItemView.prototype.draw = function() {
 		this.swagConnections[i].draw();
 
 	if (this.complete) {
-		fill(255, 0, 0);
+		fill(255, 255, 0);
 	} else {
 		fill(255, 255, 255);
 	}

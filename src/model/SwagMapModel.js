@@ -8,13 +8,11 @@ var request = require('request');
 
 // This is something quite ugly, it's a hack workaround...
 // The Node version of Tincan doesn't work without it...
-if (!process.versions) {
+/*if (!process.versions) {
     process.versions = {
         node: "not_node"
     }
-}
-
-var TinCan = require("tincanjs");
+}*/
 
 /**
  * Main swag map model.
