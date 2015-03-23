@@ -102,6 +102,7 @@ SwagItemModel.prototype.handleXApiStatement = function(xApiStament) {
 /**
  * Check if an object url matches this item, i.e., if its url
  * would mean completion of this item.
+ * @method objectUrlMatches
  */
 SwagItemModel.prototype.objectUrlMatches = function(objectUrl) {
 	var i;
