@@ -20684,13 +20684,17 @@ function SwagItemModel(jsondata) {
 	this.y = jsondata.y;
 	this.label = jsondata.label;
 	this.object = jsondata.object;
+
+	if (typeof this.object == "string")
+		this.object = [this.object];
+
 	this.completed = false;
 	this.swagMapModel = null;
 
 	if (jsondata.verb)
 		this.verb = jsondata.verb;
 
-	this.loadingCompletion = false;
+	this.callsInProgress = 0;
 }
 inherits(SwagItemModel, EventDispatcher);
 
@@ -20749,7 +20753,7 @@ SwagItemModel.prototype.handleXApiStatement = function(xApiStament) {
 	else
 		throw new Error("statement doesn't have a target or object");
 
-	if (object["id"] != this.object)
+	if (!this.objectUrlMatches(object["id"]))
 		return;
 
 	if (this.verb) {
@@ -20759,6 +20763,20 @@ SwagItemModel.prototype.handleXApiStatement = function(xApiStament) {
 	} else if (verb['id'].search("completed") >= 0) {
 		this.completed = true;
 	}
+}
+
+/**
+ * Check if an object url matches this item, i.e., if its url
+ * would mean completion of this item.
+ */
+SwagItemModel.prototype.objectUrlMatches = function(objectUrl) {
+	var i;
+
+	for (i = 0; i < this.object.length; i++)
+		if (objectUrl == this.object[i])
+			return true;
+
+	return false;
 }
 
 /**
@@ -20774,31 +20792,38 @@ SwagItemModel.prototype.setSwagMapModel = function(swagMapModel) {
  *  @method updateCompletion
  */
 SwagItemModel.prototype.updateCompletion = function() {
+	if (this.callsInProgress > 0)
+		throw new Error("Already loading...");
+
 	var tincan = this.swagMapModel.getTinCan();
 	var statements = [];
 	var scope = this;
-	this.loadingCompletion = true;
+	this.callsInProgress = 1;
 
-	tincan.getStatements({
-		params: {
-			"agent": new TinCan.Agent({
-				"mbox": "mailto:" + this.swagMapModel.getActorEmail()
-			}),
-			"activity": new TinCan.Activity({
-				"id": this.object
-			})
-		},
-		callback: function(err, result) {
-			for (var i = 0; i < result.statements.length; i++) {
-				statements[i] = result.statements[i];
+	var oi;
+
+	for (oi=0; oi<this.object.length; oi++) {
+		tincan.getStatements({
+			params: {
+				"agent": new TinCan.Agent({
+					"mbox": "mailto:" + this.swagMapModel.getActorEmail()
+				}),
+				"activity": new TinCan.Activity({
+					"id": this.object[oi]
+				})
+			},
+			callback: function(err, result) {
+				for (var i = 0; i < result.statements.length; i++) {
+					statements[i] = result.statements[i];
+				}
+				for (var i = 0; i < statements.length; i++) {
+					scope.handleXApiStatement(statements[i]);
+				}
+				scope.callsInProgress--;
+				scope.trigger("update");
 			}
-			for (var i = 0; i < statements.length; i++) {
-				scope.handleXApiStatement(statements[i]);
-			}
-			scope.loadingCompletion = false;
-			scope.trigger("update");
-		}
-	});
+		});
+	}
 }
 
 /**
@@ -20806,7 +20831,7 @@ SwagItemModel.prototype.updateCompletion = function() {
  * @method isLoading
  */
 SwagItemModel.prototype.isLoading = function() {
-	return this.loadingCompletion;
+	return this.callsInProgress > 0;
 }
 
 module.exports = SwagItemModel;

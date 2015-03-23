@@ -78,6 +78,28 @@ describe("SwagItemModel", function() {
 		expect(swagItemModel.isComplete()).toBe(false);
 	});
 
+	it("can have several objects where any of them results in completion", function() {
+		var jsonData = {
+			x: 20,
+			y: 21,
+			object: ["http://example.com/activity", "http://example.com/activity2"]
+		};
+
+		var swagItemModel = new SwagItemModel(jsonData);
+
+		expect(swagItemModel.isComplete()).toBe(false);
+		xApiStatement = {
+			"verb": {
+				"id": "http://adlnet.gov/expapi/verbs/completed/"
+			},
+			"object": {
+				"id": "http://example.com/activity2"
+			}
+		};
+		swagItemModel.handleXApiStatement(xApiStatement);
+		expect(swagItemModel.isComplete()).toBe(true);
+	});
+
 	it("can update completion by calling xAPI", function() {
 		var mockTinCan = {};
 		mockTinCan.getStatements = function(o) {
@@ -85,7 +107,7 @@ describe("SwagItemModel", function() {
 			expect(o.params.activity).toEqual(jasmine.any(TinCan.Activity));
 
 			expect(o.params.agent.mbox).toEqual("mailto:hello@example.com");
-			expect(o.params.activity.id).toEqual("http://example.com/activity");
+			//expect(o.params.activity.id).toEqual("http://example.com/activity");
 
 			o.callback(null, {
 				statements: [{
@@ -96,11 +118,13 @@ describe("SwagItemModel", function() {
 						"id": "http://adlnet.gov/expapi/verbs/completed/"
 					},
 					"object": {
-						"id": "http://example.com/activity"
+						"id": "http://example.com/activity2"
 					}
 				}]
 			});
 		};
+
+		spyOn(mockTinCan, "getStatements").and.callThrough();
 
 		var mockSwagMapModel = {};
 		mockSwagMapModel.getTinCan = function() {
@@ -114,7 +138,7 @@ describe("SwagItemModel", function() {
 		var data = {
 			x: 20,
 			y: 21,
-			object: "http://example.com/activity"
+			object: ["http://example.com/activity", "http://example.com/activity2"]
 		}
 
 		var updateSpy = jasmine.createSpy();
@@ -125,5 +149,7 @@ describe("SwagItemModel", function() {
 
 		expect(updateSpy).toHaveBeenCalled();
 		expect(swagItemModel.isComplete()).toBe(true);
+
+		expect(mockTinCan.getStatements.calls.count()).toBe(2);
 	});
 });

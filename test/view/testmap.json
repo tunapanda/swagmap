@@ -14,6 +14,6 @@
     "x": 360,
     "y": 190,
     "label": "Level 3",
-    "object": "http://ktouch.tunapanda.org/tunapanda.ktouch.xml#2"
+    "object": ["http://tunapanda.org/ktouch/2","http://ktouch.tunapanda.org/tunapanda.ktouch.xml#2"]
   }]
 }
