@@ -3,7 +3,13 @@
 swagmap
 =======
 
-Visualize learning paths in a gamified way
+Visualize learning paths in a gamified way.
+
+This is the part of (https://github.com/tunapanda/swag) that actually shows the swagmaps.
+
+It is not indented to be installed directly by end users, but developers might be interested in doing so!
+
+It is not independently _usable_, but it is independently _testable_.
 
 Demos and docs
 --------------
