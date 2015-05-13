@@ -1,11 +1,9 @@
-[![Build Status](https://travis-ci.org/tunapanda/swagmap.svg?branch=master)](https://travis-ci.org/tunapanda/swagmap)
-
 swagmap
 =======
 
 Visualize learning paths in a gamified way.
 
-This is the part of [Swag](https://github.com/tunapanda/swag) that actually shows the swagmaps.
+This is a part of [Swag](https://github.com/tunapanda/swag), and it is the part that actually shows the swagmaps.
 
 It is not indented to be installed directly by end users, but developers might be interested in doing so!
 
@@ -26,3 +24,18 @@ Deployment
 ----------
 
 In order to deploy this app, you need the bundled file in the bin dir, as well as [p5.js](http://p5js.org/). To see an example how to set things up, see: [test/view/apptest.html](https://github.com/tunapanda/swagmap/blob/master/test/view/apptest.html)
+
+Hacking
+-------
+
+To build this locally to hack on it, first do:
+
+````
+npm install
+````
+
+Inside the checked out directory. Then, run `grunt` and you will see a number of build tasks. The task that builds the bundled javascript is:
+
+````
+grunt build
+````
